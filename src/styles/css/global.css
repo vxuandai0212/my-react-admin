@@ -1,0 +1,113 @@
+@import './transition.css';
+@import './font.css';
+@import './variable.css';
+
+* {
+  font-family: var(--font);
+  font-style: normal;
+  line-height: normal;
+}
+
+:disabled {
+  cursor: not-allowed;
+  background-color: transparent;
+  opacity: 0.7;
+}
+
+html,
+body,
+#app {
+  height: 100%;
+}
+
+.overflow-y-no-scrollbar {
+  overflow: hidden;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.overflow-y-no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.overflow-y-no-scrollbar:hover {
+  overflow-y: auto;
+}
+
+.overflow-x-no-scrollbar {
+  overflow: hidden;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.overflow-x-no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.overflow-x-no-scrollbar:hover {
+  overflow-x: auto;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: white;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  background: #c5c5cc;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a9a9af;
+}
+
+.required:after {
+  content: ' *';
+  color: #ff808b;
+}
+
+.__textarea__ {
+  background-color: var(--background-light);
+  &:focus-visible {
+    outline: none;
+  }
+}
+
+.__input__ {
+  &:focus-visible {
+    outline: none;
+  }
+  &::placeholder {
+    color: #8181a5;
+    font-family: Lato;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  border: none;
+  -webkit-text-fill-color: #1c1d21;
+  -webkit-box-shadow: 0 0 0px 1000px #ffffff inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+input:-webkit-autofill::first-line {
+  color: #1c1d21;
+  font-family: Lato;
+  font-weight: 700;
+}
