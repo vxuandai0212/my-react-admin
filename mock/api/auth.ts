@@ -1,6 +1,5 @@
 import type { MockMethod } from 'vite-plugin-mock'
 import { userModel } from '../model'
-import { Service } from '@/typings/system'
 
 const ERROR_PARAM_CODE = 10000
 

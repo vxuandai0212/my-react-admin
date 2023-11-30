@@ -1,6 +1,5 @@
 import type { MockMethod } from 'vite-plugin-mock'
 import { mock } from 'mockjs'
-import { Service } from '@/typings/system'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import 'dayjs/locale/vi'

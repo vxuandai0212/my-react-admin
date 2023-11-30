@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import type { DatePickerProps } from 'antd'
@@ -12,8 +12,11 @@ import 'dayjs/locale/fr'
 import 'dayjs/locale/es'
 import 'dayjs/locale/vi'
 import { ReactSVG } from 'react-svg'
+import { mockRequest } from '@/service/request'
+import { BarLoading } from './components/loading/BarLoading'
 
 function App() {
+  console.log('re-render app')
   const [count, setCount] = useState(0)
 
   const { i18n } = useTranslation()
@@ -21,6 +24,10 @@ function App() {
   const onChange: DatePickerProps['onChange'] = (date, dateString) => {
     console.log(date, dateString)
   }
+
+  useEffect(() => {
+    mockRequest.post<ApiReport.OverviewStat[]>('/reports/overview-stat')
+  }, [])
 
   return (
     <ConfigProvider locale={ANT_MAP_LOCALE[i18n.language]}>
@@ -50,6 +57,7 @@ function App() {
         locale={ANT_DATE_MAP_LOCALE[i18n.language]}
         onChange={onChange}
       />
+      <BarLoading />
     </ConfigProvider>
   )
 }

@@ -5,6 +5,10 @@ export default (viteEnv: ImportMetaEnv) => {
 
   return viteMockServe({
     mockPath: 'mock',
-    enable,
+    prodEnabled: enable,
+    injectCode: `
+			import { setupMockServer } from '../mock';
+			setupMockServer();
+		`,
   })
 }

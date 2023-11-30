@@ -1,5 +1,4 @@
 import type { MockMethod } from 'vite-plugin-mock'
-import { Service } from '@/typings/system'
 import { invoiceModel } from '../model'
 
 const apis: MockMethod[] = [
@@ -17,7 +16,9 @@ const apis: MockMethod[] = [
       let filterItems
 
       if (status && status !== 'all') {
-        filterItems = invoiceModel.list.filter((i: ApiInvoice.Invoice) => i.status === status)
+        filterItems = invoiceModel.list.filter(
+          (i: ApiInvoice.Invoice) => i.status === status
+        )
         items = filterItems.filter(
           (_i: any, index: number) => index <= endIndex && index >= startIndex
         )

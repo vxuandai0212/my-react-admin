@@ -25,10 +25,10 @@ setupApp()
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <Suspense fallback={<BarLoading />}>
-      <I18nextProvider i18n={i18next}>
+    <I18nextProvider i18n={i18next}>
+      <Suspense fallback={<BarLoading />}>
         <App />
-      </I18nextProvider>
-    </Suspense>
+      </Suspense>
+    </I18nextProvider>
   </React.StrictMode>
 )

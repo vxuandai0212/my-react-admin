@@ -1,11 +1,6 @@
 import { defineConfig, loadEnv } from 'vite'
 
-import {
-  createViteProxy,
-  getSrcPath,
-  setupVitePlugins,
-  version,
-} from './build'
+import { createViteProxy, getSrcPath, setupVitePlugins, version } from './build'
 import { getServiceEnvConfig } from './.env-config'
 
 export default defineConfig((configEnv) => {
@@ -42,14 +37,7 @@ export default defineConfig((configEnv) => {
       proxy: createViteProxy(isOpenProxy, envConfig),
     },
     optimizeDeps: {
-      include: [
-        'echarts',
-        'swiper',
-        'swiper/vue',
-        'vditor',
-        'wangeditor',
-        'xgplayer',
-      ],
+      include: ['echarts'],
     },
     build: {
       reportCompressedSize: false,
