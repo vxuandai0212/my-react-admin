@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import type { DatePickerProps } from 'antd'
 import { ConfigProvider, DatePicker } from 'antd'
@@ -11,9 +10,13 @@ import 'dayjs/locale/en'
 import 'dayjs/locale/fr'
 import 'dayjs/locale/es'
 import 'dayjs/locale/vi'
-import { ReactSVG } from 'react-svg'
 import { mockRequest } from '@/service/request'
 import { BarLoading } from './components/loading/BarLoading'
+import RIcon from '@/components/icon/RIcon'
+import RCheckbox from './components/form/RCheckbox'
+import RInput from './components/form/RInput'
+import RRadio from './components/form/RRadio'
+import RToggle from './components/form/RToggle'
 
 function App() {
   console.log('re-render app')
@@ -29,6 +32,67 @@ function App() {
     mockRequest.post<ApiReport.OverviewStat[]>('/reports/overview-stat')
   }, [])
 
+  const [checkboxValue, setCheckboxValue] = useState<Array<number>>([1])
+  function handleCheckboxValue(v: any) {
+    if (checkboxValue.indexOf(v) === -1) {
+      const newArr: number[] = [...checkboxValue, v]
+      setCheckboxValue(newArr)
+    } else {
+      const newArr = checkboxValue.filter((i) => i !== v)
+      setCheckboxValue(newArr)
+    }
+  }
+
+  const checkboxOptions: {
+    key: any
+    label: I18nType.I18nKey
+    value: any
+  }[] = [
+    {
+      key: 1,
+      value: 1,
+      label: 'page.login.form.rememberLogin.label',
+    },
+  ]
+
+  const [inputValue, setInputValue] = useState<string>('')
+  const rules: any = {
+    email: [
+      {
+        required: true,
+        trigger: ['blur', 'input'],
+        message: 'page.login.error.email.required',
+      },
+    ],
+    password: [
+      {
+        required: true,
+        trigger: ['blur', 'change'],
+        message: 'page.login.error.password.required',
+      },
+    ],
+  }
+
+  const [radioInput, setRadioInput] = useState<string>('')
+  const radioOptions: {
+    key: any
+    label: I18nType.I18nKey
+    value: any
+  }[] = [
+    {
+      key: 1,
+      value: 1,
+      label: 'page.login.form.rememberLogin.label',
+    },
+    {
+      key: 2,
+      value: 2,
+      label: 'page.login.form.rememberLogin.label',
+    },
+  ]
+
+  const [toggleValue, setToggleValue] = useState<boolean>(false)
+
   return (
     <ConfigProvider locale={ANT_MAP_LOCALE[i18n.language]}>
       <div>
@@ -37,7 +101,7 @@ function App() {
         </a>
         <a href='https://react.dev' target='_blank'>
           {/* <img src={reactLogo} className='logo react' alt='React logo' /> */}
-          <ReactSVG className={'fill-red-500'} src={reactLogo} />
+          <RIcon className='fill-primary-dark' width='16px' icon='add' />
         </a>
       </div>
       <h1>Vite + React</h1>
@@ -58,6 +122,33 @@ function App() {
         onChange={onChange}
       />
       <BarLoading />
+      <RCheckbox
+        options={checkboxOptions}
+        updateValue={handleCheckboxValue}
+        value={checkboxValue}
+      />
+      <div className='flex flex-col gap-5'>
+        <RInput
+          label='page.login.form.email.label'
+          rules={rules.email}
+          icon='email'
+          placeholder='page.login.form.email.placeholder'
+          type='text'
+          value={inputValue}
+          onInput={setInputValue}
+        />
+        <RRadio
+          label='page.login.form.email.label'
+          onChooseOption={setRadioInput}
+          options={radioOptions}
+          value={radioInput}
+        />
+        <RToggle
+          label='page.invoice.command.view'
+          onUpdateValue={setToggleValue}
+          value={toggleValue}
+        />
+      </div>
     </ConfigProvider>
   )
 }
