@@ -1,4 +1,4 @@
-import { SvgAdd, SvgEmail, SvgOval, SvgTick } from '@/components/svg'
+import { SvgAdd, SvgBusiness, SvgCart, SvgEmail, SvgKeyboard, SvgLaptop, SvgMoney, SvgOval, SvgPhone, SvgTick } from '@/components/svg'
 import { SVGProps } from 'react'
 
 const ICON: {
@@ -7,7 +7,13 @@ const ICON: {
   add: SvgAdd,
   tick: SvgTick,
   email: SvgEmail,
-  oval: SvgOval
+  oval: SvgOval,
+  keyboard: SvgKeyboard,
+  phone: SvgPhone,
+  cart: SvgCart,
+  business: SvgBusiness,
+  money: SvgMoney,
+  laptop: SvgLaptop
 }
 
 const RIcon: React.FC<{

@@ -1,1 +1,11 @@
-type LocalIcon = 'add' | 'tick' | 'email' | 'oval'
+type LocalIcon =
+  | 'add'
+  | 'tick'
+  | 'email'
+  | 'oval'
+  | 'keyboard'
+  | 'phone'
+  | 'cart'
+  | 'business'
+  | 'money'
+  | 'laptop'

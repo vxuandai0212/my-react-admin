@@ -18,6 +18,8 @@ import RInput from './components/form/RInput'
 import RRadio from './components/form/RRadio'
 import RToggle from './components/form/RToggle'
 import RSelect from './components/form/RSelect'
+import RDatepicker from './components/form/RDatepicker'
+import AddButton from './components/button/AddButton'
 
 function App() {
   console.log('re-render app')
@@ -138,6 +140,8 @@ function App() {
     },
   ]
 
+  const [datePickerValue, setDatePickerValue] = useState<number>()
+
   return (
     <ConfigProvider locale={ANT_MAP_LOCALE[i18n.language]}>
       <div>
@@ -201,6 +205,15 @@ function App() {
           onUpdateValue={(v) => setDropdownValue(v)}
           rules={rules.email}
         />
+        <RDatepicker
+          label={'system.title'}
+          setDatePicker={setDatePickerValue}
+          value={datePickerValue}
+          placeholder={'system.title'}
+          type={'date'}
+          rules={rules.email}
+        />
+        <AddButton />
       </div>
     </ConfigProvider>
   )

@@ -1,6 +1,7 @@
 import { DatePicker, DatePickerProps } from 'antd'
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import './RDatepicker.css'
 
 interface Props {
   label: I18nType.I18nKey
@@ -9,6 +10,7 @@ interface Props {
   placeholder: I18nType.I18nKey
   disabled?: boolean
   type: 'date' | 'week' | 'month' | 'quarter' | 'year'
+  setDatePicker: (v: any) => void
 }
 
 const RDatepicker: React.FC<Props> = ({
@@ -18,6 +20,7 @@ const RDatepicker: React.FC<Props> = ({
   placeholder,
   disabled,
   type,
+  setDatePicker
 }) => {
   const {t} = useTranslation()
   const [errorMessage, setErrorMessage] = useState<string>('')
@@ -36,16 +39,27 @@ const RDatepicker: React.FC<Props> = ({
     return false
   }, [rules])
 
-  const onChange: DatePickerProps['onChange'] = (date, dateString) => {
-    console.log(date, dateString)
+  useEffect(() => {
+    validate()
+  }, [inputFocus, value])
+
+  const onBlur = () => {
+    setInputFocus(false)
+  }
+
+  const validate = () => {
+    if (isRequired && !value && !inputFocus && firstFocus) {
+      setError(true)
+    } else {
+      setError(false)
+    }
   }
 
 
-const color = () =>
- value &&value.trim() !== ''
-    ? 'var(--primary-dark)'
-    : 'var(--primary-grey)'
-
+  const onChange: DatePickerProps['onChange'] = (date, dateString) => {
+    console.log(date, dateString)
+    setDatePicker(date)
+  }
 
 const borderBottomColor = () =>
   error
@@ -53,7 +67,6 @@ const borderBottomColor = () =>
     : inputFocus
     ? 'var(--primary)'
     : 'var(--outline)'
-
 
   return (
     <div>
@@ -74,6 +87,9 @@ const borderBottomColor = () =>
           picker={type}
           disabled={disabled}       
           placeholder={t(placeholder)}   
+          onFocus={() => {setInputFocus(true); setFirstFocus(true)}}
+          onBlur={() => onBlur()}
+          value={value}
         />
       </div>
       <div

@@ -1,4 +1,4 @@
-import { Dropdown, MenuProps } from 'antd'
+import { Popover } from 'antd'
 import { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import RIcon from '@/components/icon/RIcon'
@@ -10,7 +10,7 @@ interface Props {
   icon?: LocalIcon
   placeholder: I18nType.I18nKey
   disabled?: boolean
-  options: MenuProps['items']
+  options: any
   onUpdateValue: (v: string) => void
 }
 
@@ -29,6 +29,7 @@ const RSelect: React.FC<Props> = ({
   const [error, setError] = useState<boolean>(false)
   const [inputFocus, setInputFocus] = useState<boolean>(false)
   const [firstFocus, setFirstFocus] = useState<boolean>(false)
+  const [openPopover, setOpenPopover] = useState<boolean>(false)
   const isRequired = useMemo(() => {
     if (rules && rules.length > 0) {
       for (let i = 0; i < rules.length; i++) {
@@ -61,9 +62,31 @@ const RSelect: React.FC<Props> = ({
     }
   }
 
-  const onSelect = ({ item, key, keyPath, selectedKeys, domEvent }: any) => {
-    onUpdateValue(key)
-  }
+  const renderContent = options?.map((item: any) => {
+    const color =
+      item.type === 'warning'
+        ? 'warning'
+        : item.type === 'danger'
+        ? 'danger'
+        : 'primary-dark'
+    return (
+      <div
+        key={item?.key}
+        style={{ color: `var(--${color})` }}
+        className='cursor-pointer p-12-20-13-17 line-height-24 font-size-14 font-700 hover:color-primary width-300 hover:background-color-background-extra-light transition'
+        onClick={() => {
+          onUpdateValue(item.label)
+          setOpenPopover(false)
+        }}
+      >
+        {item.label}
+      </div>
+    )
+  })
+
+  const content = (
+    <div style={{ maxHeight: '265px', overflowY: 'auto' }}>{renderContent}</div>
+  )
 
   return (
     <div>
@@ -74,10 +97,11 @@ const RSelect: React.FC<Props> = ({
       >
         {t(label)}
       </div>
-      <Dropdown
-        menu={{ items: options, selectable: true, onSelect: onSelect }}
-        trigger={['click']}
-        overlayStyle={{ maxHeight: '265px', overflowY: 'auto' }}
+      <Popover
+        open={openPopover}
+        content={content}
+        trigger={'click'}
+        onOpenChange={(visible) => setOpenPopover(visible)}
       >
         <div
           className='transition border-bottom-solid border-bottom-1 p-6-0-17-0 flex flex-row gap-2'
@@ -108,7 +132,7 @@ const RSelect: React.FC<Props> = ({
             </div>
           ) : null}
         </div>
-      </Dropdown>
+      </Popover>
       <div
         className='color-danger font-size-14 font-400 line-height-21 transition'
         style={{ opacity: showError() }}
