@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import viteLogo from '/vite.svg'
-import type { DatePickerProps } from 'antd'
+import type { DatePickerProps, MenuProps } from 'antd'
 import { ConfigProvider, DatePicker } from 'antd'
 import './App.css'
 import Weather from './Weather'
@@ -17,6 +17,7 @@ import RCheckbox from './components/form/RCheckbox'
 import RInput from './components/form/RInput'
 import RRadio from './components/form/RRadio'
 import RToggle from './components/form/RToggle'
+import RSelect from './components/form/RSelect'
 
 function App() {
   console.log('re-render app')
@@ -93,6 +94,50 @@ function App() {
 
   const [toggleValue, setToggleValue] = useState<boolean>(false)
 
+  const [dropdownValue, setDropdownValue] = useState<string>('')
+  const dropdownOptions: MenuProps['items'] = [
+    {
+      key: 'Option 1',
+      label: 'Option 1',
+    },
+    {
+      key: 'Option 2',
+      label: 'Option 2',
+    },
+    {
+      key: 'Option 3',
+      label: 'Option 3',
+    },
+    {
+      key: 'Option 4',
+      label: 'Option 4',
+    },
+    {
+      key: 'Option 5',
+      label: 'Option 5',
+    },
+    {
+      key: 'Option 6',
+      label: 'Option 6',
+    },
+    {
+      key: 'Option 7',
+      label: 'Option 7',
+    },
+    {
+      key: 'Option 8',
+      label: 'Option 8',
+    },
+    {
+      key: 'Option 9',
+      label: 'Option 9',
+    },
+    {
+      key: 'Option 10',
+      label: 'Option 10',
+    },
+  ]
+
   return (
     <ConfigProvider locale={ANT_MAP_LOCALE[i18n.language]}>
       <div>
@@ -147,6 +192,14 @@ function App() {
           label='page.invoice.command.view'
           onUpdateValue={setToggleValue}
           value={toggleValue}
+        />
+        <RSelect
+          label={'system.title'}
+          value={dropdownValue}
+          placeholder={'system.title'}
+          options={dropdownOptions}
+          onUpdateValue={(v) => setDropdownValue(v)}
+          rules={rules.email}
         />
       </div>
     </ConfigProvider>
