@@ -1,4 +1,4 @@
-import { SvgAdd, SvgBusiness, SvgCart, SvgEmail, SvgKeyboard, SvgLaptop, SvgMoney, SvgOval, SvgPhone, SvgTick } from '@/components/svg'
+import { SvgAdd, SvgBusiness, SvgCart, SvgDiamond, SvgEmail, SvgHamburger, SvgKeyboard, SvgLanguage, SvgLaptop, SvgMoney, SvgOval, SvgPhone, SvgTick } from '@/components/svg'
 import { SVGProps } from 'react'
 
 const ICON: {
@@ -13,7 +13,10 @@ const ICON: {
   cart: SvgCart,
   business: SvgBusiness,
   money: SvgMoney,
-  laptop: SvgLaptop
+  laptop: SvgLaptop,
+  hamburger: SvgHamburger,
+  language: SvgLanguage,
+  diamond: SvgDiamond
 }
 
 const RIcon: React.FC<{

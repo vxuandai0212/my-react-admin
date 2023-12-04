@@ -20,6 +20,13 @@ import RToggle from './components/form/RToggle'
 import RSelect from './components/form/RSelect'
 import RDatepicker from './components/form/RDatepicker'
 import AddButton from './components/button/AddButton'
+import HamburgerMenu from './components/button/HamburgerMenu'
+import LangButton from './components/button/LangButton'
+import PrimaryButton from './components/button/PrimaryButton'
+import RestingButton from './components/button/RestingButton'
+import { useLoading } from './hooks'
+import { fetchPopularCategory } from './service'
+import CategoryCard from './components/card/CategoryCard'
 
 function App() {
   console.log('re-render app')
@@ -142,6 +149,67 @@ function App() {
 
   const [datePickerValue, setDatePickerValue] = useState<number>()
 
+  const { loading, startLoading, endLoading } = useLoading(false)
+
+  const I18N_MAP: { [key: string]: I18nType.I18nKey } = {
+    electronic: 'page.report.popularCategory.electronic',
+    accessory: 'page.report.popularCategory.accessory',
+    'digital-good': 'page.report.popularCategory.digitalGood',
+  }
+
+  const ICON_MAP: { [key: string]: LocalIcon } = {
+    electronic: 'laptop',
+    accessory: 'diamond',
+    'digital-good': 'keyboard',
+  }
+
+  const ICON_FILL_COLOR = {
+    electronic: 'primary',
+    accessory: 'danger',
+    'digital-good': 'primary-grey',
+  }
+
+  const ICON_BACKGROUND_COLOR = {
+    electronic: 'primary-resting',
+    accessory: 'danger-light',
+    'digital-good': 'background-2',
+  }
+
+  const [categoryCardData, setCategoryCardData] =
+    useState<CategoryCardProps[]>()
+
+  function setData(value: ApiReport.PopularCategory[]) {
+    const temp = value.map(function (i): CategoryCardProps {
+      return {
+        icon: ICON_MAP[i.type],
+        title: I18N_MAP[i.type],
+        value: i.value,
+        iconFillColor: ICON_FILL_COLOR[i.type],
+        iconBackgroundColor: ICON_BACKGROUND_COLOR[i.type],
+      }
+    })
+    setCategoryCardData(temp)
+  }
+
+  async function getData() {
+    startLoading()
+    const { data } = await fetchPopularCategory()
+    if (data) {
+      setTimeout(() => {
+        setData(data)
+        endLoading()
+      }, 1000)
+    }
+  }
+
+  function init() {
+    getData()
+  }
+
+  useEffect(() => {
+    init()
+  }, [])
+
   return (
     <ConfigProvider locale={ANT_MAP_LOCALE[i18n.language]}>
       <div>
@@ -214,6 +282,20 @@ function App() {
           rules={rules.email}
         />
         <AddButton />
+        <HamburgerMenu />
+        <LangButton />
+        <PrimaryButton className='p-5' label={'system.title'} />
+        <RestingButton className='p-5' label={'system.title'} />
+        {loading.current ? (
+          <BarLoading />
+        ) : (
+          <div className='flex flex-col gap-9'>
+            {categoryCardData &&
+              categoryCardData.map((item) => (
+                <CategoryCard key={item.title} {...item} />
+              ))}
+          </div>
+        )}
       </div>
     </ConfigProvider>
   )

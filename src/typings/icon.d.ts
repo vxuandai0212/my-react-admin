@@ -9,3 +9,7 @@ type LocalIcon =
   | 'business'
   | 'money'
   | 'laptop'
+  | 'hamburger'
+  | 'language'
+  | 'diamond'
+  
