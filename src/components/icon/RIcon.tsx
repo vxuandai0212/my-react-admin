@@ -1,22 +1,58 @@
-import { SvgAdd, SvgBusiness, SvgCart, SvgDiamond, SvgEmail, SvgHamburger, SvgKeyboard, SvgLanguage, SvgLaptop, SvgMoney, SvgOval, SvgPhone, SvgTick } from '@/components/svg'
+import { SvgAdd, SvgArrow, SvgAttach, SvgBill, SvgBusiness, SvgCalendar, SvgCaretDown, SvgCart, SvgCompany, SvgContact, SvgCreate, SvgDashboard, SvgDate, SvgDelete, SvgDescription, SvgDiamond, SvgDropbox, SvgEmail, SvgEmoticon, SvgFacebook, SvgFile, SvgFrom, SvgFullname, SvgGoogle, SvgHamburger, SvgHelp, SvgHour, SvgInvoice, SvgKanban, SvgKeyboard, SvgLanguage, SvgLaptop, SvgMessage, SvgMoney, SvgNotification, SvgOval, SvgPassword, SvgPhone, SvgProduct, SvgProject, SvgRate, SvgReport, SvgSave, SvgSearch, SvgTask, SvgThreeDot, SvgTick, SvgTwitter, SvgUpload } from '@/components/svg'
 import { SVGProps } from 'react'
 
 const ICON: {
   [key in LocalIcon]: React.FC<SVGProps<SVGSVGElement>>
 } = {
   add: SvgAdd,
-  tick: SvgTick,
-  email: SvgEmail,
-  oval: SvgOval,
-  keyboard: SvgKeyboard,
-  phone: SvgPhone,
-  cart: SvgCart,
+  arrow: SvgArrow,
+  attach: SvgAttach,
+  bill: SvgBill,
   business: SvgBusiness,
-  money: SvgMoney,
-  laptop: SvgLaptop,
+  calendar: SvgCalendar,
+  'caret-down': SvgCaretDown,
+  cart: SvgCart,
+  company: SvgCompany,
+  contact: SvgContact,
+  create: SvgCreate,
+  dashboard: SvgDashboard,
+  date: SvgDate,
+  delete: SvgDelete,
+  description: SvgDescription,
+  diamond: SvgDiamond,
+  dropbox: SvgDropbox,
+  email: SvgEmail,
+  emoticon: SvgEmoticon,
+  facebook: SvgFacebook,
+  file: SvgFile,
+  from: SvgFrom,
+  fullname: SvgFullname,
+  google: SvgGoogle,
   hamburger: SvgHamburger,
+  help: SvgHelp,
+  hour: SvgHour,
+  invoice: SvgInvoice,
+  kanban: SvgKanban,
+  keyboard: SvgKeyboard,
   language: SvgLanguage,
-  diamond: SvgDiamond
+  laptop: SvgLaptop,
+  message: SvgMessage,
+  money: SvgMoney,
+  notification: SvgNotification,
+  oval: SvgOval,
+  password: SvgPassword,
+  phone: SvgPhone,
+  product: SvgProduct,
+  project: SvgProject,
+  rate: SvgRate,
+  report: SvgReport,
+  save: SvgSave,
+  search: SvgSearch,
+  task: SvgTask,
+  'three-dot': SvgThreeDot,
+  tick: SvgTick,
+  twitter: SvgTwitter,
+  upload: SvgUpload
 }
 
 const RIcon: React.FC<{

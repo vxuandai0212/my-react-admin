@@ -27,6 +27,7 @@ import RestingButton from './components/button/RestingButton'
 import { useLoading } from './hooks'
 import { fetchPopularCategory } from './service'
 import CategoryCard from './components/card/CategoryCard'
+import SimpleSearch from './components/search/SimpleSearch'
 
 function App() {
   console.log('re-render app')
@@ -296,6 +297,7 @@ function App() {
               ))}
           </div>
         )}
+        <SimpleSearch />
       </div>
     </ConfigProvider>
   )
