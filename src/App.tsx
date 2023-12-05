@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import viteLogo from '/vite.svg'
 import type { DatePickerProps, MenuProps } from 'antd'
 import { ConfigProvider, DatePicker } from 'antd'
-import './App.css'
 import Weather from './Weather'
 import { ANT_DATE_MAP_LOCALE, ANT_MAP_LOCALE } from '@/locales'
 import { useTranslation } from 'react-i18next'
@@ -28,6 +27,7 @@ import { useLoading } from './hooks'
 import { fetchPopularCategory } from './service'
 import CategoryCard from './components/card/CategoryCard'
 import SimpleSearch from './components/search/SimpleSearch'
+import { AppRouter } from './router/AppRouter'
 
 function App() {
   console.log('re-render app')
@@ -213,92 +213,7 @@ function App() {
 
   return (
     <ConfigProvider locale={ANT_MAP_LOCALE[i18n.language]}>
-      <div>
-        <a href='https://vitejs.dev' target='_blank'>
-          <img src={viteLogo} className='logo' alt='Vite logo' />
-        </a>
-        <a href='https://react.dev' target='_blank'>
-          {/* <img src={reactLogo} className='logo react' alt='React logo' /> */}
-          <RIcon className='fill-primary-dark' width='16px' icon='add' />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className='card'>
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className='read-the-docs'>
-        Click on the Vite and React logos to learn more
-      </p>
-      <Weather />
-      <DatePicker
-        locale={ANT_DATE_MAP_LOCALE[i18n.language]}
-        onChange={onChange}
-      />
-      <BarLoading />
-      <RCheckbox
-        options={checkboxOptions}
-        updateValue={handleCheckboxValue}
-        value={checkboxValue}
-      />
-      <div className='flex flex-col gap-5'>
-        <RInput
-          label='page.login.form.email.label'
-          rules={rules.email}
-          icon='email'
-          placeholder='page.login.form.email.placeholder'
-          type='text'
-          value={inputValue}
-          onInput={setInputValue}
-        />
-        <RRadio
-          label='page.login.form.email.label'
-          onChooseOption={setRadioInput}
-          options={radioOptions}
-          value={radioInput}
-        />
-        <RToggle
-          label='page.invoice.command.view'
-          onUpdateValue={setToggleValue}
-          value={toggleValue}
-        />
-        <RSelect
-          label={'system.title'}
-          value={dropdownValue}
-          placeholder={'system.title'}
-          options={dropdownOptions}
-          onUpdateValue={(v) => setDropdownValue(v)}
-          rules={rules.email}
-        />
-        <RDatepicker
-          label={'system.title'}
-          setDatePicker={setDatePickerValue}
-          value={datePickerValue}
-          placeholder={'system.title'}
-          type={'date'}
-          rules={rules.email}
-        />
-        <AddButton />
-        <HamburgerMenu />
-        <LangButton />
-        <PrimaryButton className='p-5' label={'system.title'} />
-        <RestingButton className='p-5' label={'system.title'} />
-        {loading.current ? (
-          <BarLoading />
-        ) : (
-          <div className='flex flex-col gap-9'>
-            {categoryCardData &&
-              categoryCardData.map((item) => (
-                <CategoryCard key={item.title} {...item} />
-              ))}
-          </div>
-        )}
-        <SimpleSearch />
-      </div>
+      <AppRouter />
     </ConfigProvider>
   )
 }

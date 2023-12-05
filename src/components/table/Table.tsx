@@ -4,6 +4,7 @@ import RTag from '../tag/RTag'
 import RIcon from '../icon/RIcon'
 import IconButton from '../button/IconButton'
 import { useState } from 'react'
+import { Popover } from 'antd'
 
 interface Format {
   type: 'datetime' | 'currency'
@@ -24,50 +25,49 @@ interface Header {
 interface Props {
   headers: Array<Header>
   data: Array<any>
-  total: number
 }
 
-const Table: React.FC<Props> = ({ headers, data, total }) => {
+const Table: React.FC<Props> = ({ headers, data }) => {
   const { t } = useTranslation()
   function isRenderCommandDropdown(item: any) {
     return item.commands && item.commands.length > 0
   }
-  
+
   function getWidth(key: any) {
     if (!isShowField(key)) return
     const width = headers.filter((item) => item.key === key)[0].width
     return `${width}%`
   }
-  
+
   function isMatchType(key: any, matchType: any) {
     if (!isShowField(key)) return
     const type = headers.filter((item) => item.key === key)[0].type
     return type === matchType
   }
-  
+
   function getFontStyle(key: any) {
     if (!isShowField(key)) return
     const fontStyle = headers.filter((item) => item.key === key)[0].style
     if (fontStyle === 'italic') return 'italic'
     return
   }
-  
+
   function getFontWeight(key: any) {
     if (!isShowField(key)) return
     const fontWeight = headers.filter((item) => item.key === key)[0].style
     if (fontWeight === 'bold') return '700'
     else return '400'
   }
-  
+
   function getJustifyContent(key: any) {
     if (!isShowField(key)) return
     const align = headers.filter((item) => item.key === key)[0].align
     return align ? align : 'left'
   }
-  
+
   const { datetime } = useDatetime()
-  const {moneyFormat} = useNumber()
-  
+  const { moneyFormat } = useNumber()
+
   function getFormatText(key: any, value: any) {
     if (!isShowField(key)) return
     const format = headers.filter((item) => item.key === key)[0].format
@@ -83,7 +83,7 @@ const Table: React.FC<Props> = ({ headers, data, total }) => {
       return value
     }
   }
-  
+
   function isShowField(key: any) {
     return headers.filter((item) => item.key === key).length > 0
   }
@@ -109,40 +109,35 @@ const Table: React.FC<Props> = ({ headers, data, total }) => {
       } else if (isMatchType(key, 'icon-text')) {
         return (
           <>
-          <div
-                className="width-52 height-52 rounded-8 flex justify-center items-center"
-                style={{
-                  background: `linear-gradient(
+            <div
+              className='width-52 height-52 rounded-8 flex justify-center items-center'
+              style={{
+                background: `linear-gradient(
                       0deg,
                       rgba(94, 129, 244, 0.1) 0%,
                       rgba(94, 129, 244, 0.1) 100%
                     ),
-                    #fff`
-                  }}
-              >
-                <RIcon
-                  width='18px'
-                  height='18px'
-                  fill='#5e81f4'
-                  icon="bill"
-                />
-              </div>
-              <div className="ml-20">{ getFormatText(key, value.text) }</div>
-              </>
+                    #fff`,
+              }}
+            >
+              <RIcon width='18px' height='18px' fill='#5e81f4' icon='bill' />
+            </div>
+            <div className='ml-20'>{getFormatText(key, value.text)}</div>
+          </>
         )
       } else if (isMatchType(key, 'image-text')) {
         return (
           <>
-           <img
-                className="width-36 height-36 rounded-6"
-                src={'@/assets/images/avatar.png'}
-                alt="image"
-              />
-              <div className="ml-12">{ getFormatText(key, value.text) }</div>
+            <img
+              className='width-36 height-36 rounded-6'
+              src={'@/assets/images/avatar.png'}
+              alt='image'
+            />
+            <div className='ml-12'>{getFormatText(key, value.text)}</div>
           </>
         )
       } else {
-        <>{ getFormatText(key, value) }</>
+        ;<>{getFormatText(key, value)}</>
       }
     }
     return null
@@ -151,25 +146,47 @@ const Table: React.FC<Props> = ({ headers, data, total }) => {
   const hasCommand = () => {
     const r =
       data &&
-      data.filter((item) => item.commands && item.commands.length > 0)
-        .length > 0
+      data.filter((item) => item.commands && item.commands.length > 0).length >
+        0
     return r
   }
 
-  const [selectedId, setSelectedId] = useState()
+  const [selectedId, setSelectedId] = useState<any>()
 
   function dropdownClick(v: any) {
     setSelectedId(v)
   }
 
-  const renderTableRow = (row: any, item: any) => {
-    const data = []
-    Object.keys(row).forEach((key, index) => {
-      const value = row[key]
+  const [openPopover, setOpenPopover] = useState<boolean>(false)
+
+  const renderTableRow = (item: any) => {
+    const content = item.commands.map((command: any) => {
+      const color =
+        command.type === 'warning'
+          ? 'warning'
+          : command.type === 'danger'
+          ? 'danger'
+          : 'primary-dark'
+      return (
+        <div
+          style={{ color: `var(--${color}` }}
+          className='cursor-pointer p-12-20-13-17 font-size-14 font-700 hover:color-primary hover:background-color-background-extra-light transition'
+          onClick={() => {
+            setOpenPopover(false)
+            setSelectedId(null)
+          }}
+        >
+          {t(command.label)}
+        </div>
+      )
+    })
+    const data: any = []
+    Object.keys(item).forEach((key) => {
+      const value = item[key]
       const rowData = (
         <>
           <div
-            className="color-primary-dark font-size-16 line-height-24 flex items-center cursor-default"
+            className='color-primary-dark font-size-16 line-height-24 flex items-center cursor-default'
             style={{
               width: getWidth(key),
               justifyContent: getJustifyContent(key),
@@ -179,38 +196,37 @@ const Table: React.FC<Props> = ({ headers, data, total }) => {
           >
             {renderTableCell(key, value)}
           </div>
-          {
-            hasCommand() ?
-            (
-              <div className="width-80 cursor-pointer">
-              <n-dropdown
-                v-if="isRenderCommandDropdown(item)"
-                trigger="click"
-                :options="item.commands"
-                size="large"
-                :show="selectedId === item.id"
-                :on-clickoutside="dropdownOnClickOutside"
-                :render-option="render"
-              >
-                <IconButton
-                  className="border-1 border-solid border-color-resting-outline rounded-8"
-                  icon="three-dot"
-                  icon-fill-color="primary-grey"
-                  icon-background-color="white"
-                  onClick={() => dropdownClick(item.id)}
-                />
-              </n-dropdown>
+          {hasCommand() ? (
+            <div className='width-80 cursor-pointer'>
+              {isRenderCommandDropdown(item) ? (
+                <Popover
+                  open={openPopover && selectedId === item.id}
+                  content={content}
+                  trigger={'click'}
+                  onOpenChange={(visible) => setOpenPopover(visible)}
+                >
+                  <IconButton
+                    className='border-1 border-solid border-color-resting-outline rounded-8'
+                    icon='three-dot'
+                    icon-fill-color='primary-grey'
+                    icon-background-color='white'
+                    onClick={() => dropdownClick(item.id)}
+                  />
+                </Popover>
+              ) : null}
             </div>
-            ) :
-            null
-          }
-      </>
+          ) : null}
+        </>
       )
+      data.push(rowData)
     })
+    return data
   }
   const renderTableBody = data.map((item) => {
     return (
-      <div className='border-1 border-solid border-color-resting-outline rounded-12 flex basis-88px grow-0 shrink-0 items-center m-0-25-0-25 p-0-0-0-20 hover:background-color-background-extra-light transition'></div>
+      <div className='border-1 border-solid border-color-resting-outline rounded-12 flex basis-88px grow-0 shrink-0 items-center m-0-25-0-25 p-0-0-0-20 hover:background-color-background-extra-light transition'>
+        {renderTableRow(item)}
+      </div>
     )
   })
   return (
@@ -225,3 +241,5 @@ const Table: React.FC<Props> = ({ headers, data, total }) => {
     </div>
   )
 }
+
+export default Table

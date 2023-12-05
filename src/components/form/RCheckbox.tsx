@@ -1,17 +1,11 @@
 import { useTranslation } from 'react-i18next'
 import RIcon from '@/components/icon/RIcon'
 
-interface Options {
-  key: any
-  label: I18nType.I18nKey
-  value: any
-}
-
 interface Props {
   label?: string
   value: Array<any>
   disabled?: boolean
-  options: Options[]
+  options: RCheckboxOptions[]
   updateValue: (value: any) => void
 }
 

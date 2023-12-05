@@ -94,7 +94,7 @@ const RInput: React.FC<Props> = ({
               disabled ? 'opacity70' : ''
             }`}
           >
-            <RIcon icon={icon} fill={color()} />
+            <RIcon icon={icon} fill={color()} height='16px' />
           </div>
         ) : null}
       </div>
