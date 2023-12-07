@@ -7,6 +7,7 @@ interface Props {
   disabled?: boolean
   options: RCheckboxOptions[]
   updateValue: (value: any) => void
+  className?: string
 }
 
 const RCheckbox: React.FC<Props> = ({
@@ -15,6 +16,7 @@ const RCheckbox: React.FC<Props> = ({
   disabled,
   options,
   updateValue,
+  className
 }) => {
   const { t } = useTranslation()
 
@@ -36,7 +38,7 @@ const RCheckbox: React.FC<Props> = ({
       key={item.key}
       className={`flex gap-10 items-center ${
         disabled ? 'cursor-not-allowed' : 'cursor-pointer'
-      }`}
+      } ${className}`}
       onClick={() => setValue(item.value)}
     >
       <div

@@ -4,7 +4,6 @@ import RestingButton from '@/components/button/RestingButton'
 import RCheckbox from '@/components/form/RCheckbox'
 import RInput from '@/components/form/RInput'
 import RIcon from '@/components/icon/RIcon'
-import { ReactSVG } from 'react-svg'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import LoginSVG from '@/assets/images/login.svg'
@@ -140,7 +139,7 @@ const Login: React.FC = () => {
         )`,
         }}
       >
-        <ReactSVG
+        <img
           className='h-full w-full'
           src={LoginSVG}
         />
