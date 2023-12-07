@@ -7,9 +7,11 @@ import RIcon from '@/components/icon/RIcon'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import LoginSVG from '@/assets/images/login.svg'
+import { useNavigate } from 'react-router-dom'
 
 const Login: React.FC = () => {
   const { t } = useTranslation()
+  const navigate = useNavigate()
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
   const rules: any = {
@@ -100,6 +102,7 @@ const Login: React.FC = () => {
               <RestingButton
                 className='h-46px basis-1/2 grow-0 shrink-0 overflow-hidden flex items-center justify-center'
                 label='button.signup'
+                onClick={(() => navigate('/signup'))}
               />
             </div>
             <div className='mt-77 flex gap-13 items-center'>

@@ -5,6 +5,11 @@ declare namespace ApiAuth {
   }
 
   type UserInfo = Auth.UserInfo
+
+  interface LoginRequest {
+    email: string
+    password: string
+  }
 }
 
 declare namespace ApiRoute {
