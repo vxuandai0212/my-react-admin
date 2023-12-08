@@ -11,9 +11,10 @@ import { useTranslation } from 'react-i18next'
 
 interface Props {
   routeName: I18nType.I18nKey
+  className?: string
 }
 
-const Header: React.FC<Props> = ({ routeName }) => {
+const Header: React.FC<Props> = ({ routeName, className }) => {
   const { t } = useTranslation()
   const { isMobile } = useScreen()
   const dispatch = useAppDispatch()
@@ -21,12 +22,12 @@ const Header: React.FC<Props> = ({ routeName }) => {
   const { hasPermission } = usePermission()
 
   return (
-    <div className='flex justify-between items-center height-84'>
+    <div className={`flex justify-between items-center height-84 ${className}`}>
       <div className='flex items-center'>
         {!isMobile ? (
           <IconButton
             icon='hamburger'
-            onClick={() => dispatch(toggleSiderCollapse())}
+            onClick={() => {dispatch(toggleSiderCollapse()); console.log('click hamburger')}}
           />
         ) : (
           <HamburgerMenu />

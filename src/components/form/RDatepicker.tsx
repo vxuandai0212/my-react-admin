@@ -11,6 +11,7 @@ interface Props {
   disabled?: boolean
   type: 'date' | 'week' | 'month' | 'quarter' | 'year'
   setDatePicker: (v: any) => void
+  className?: string
 }
 
 const RDatepicker: React.FC<Props> = ({
@@ -20,7 +21,8 @@ const RDatepicker: React.FC<Props> = ({
   placeholder,
   disabled,
   type,
-  setDatePicker
+  setDatePicker,
+  className
 }) => {
   const {t} = useTranslation()
   const [errorMessage, setErrorMessage] = useState<string>('')
@@ -69,7 +71,7 @@ const borderBottomColor = () =>
     : 'var(--outline)'
 
   return (
-    <div>
+    <div className={`${className}`}>
       <div
         className={`color-primary-grey font-size-14 font-400 line-height-21 cursor-default ${
           isRequired ? 'required' : ''

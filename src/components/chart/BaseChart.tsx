@@ -9,7 +9,7 @@ export interface BaseChartProps {
   width?: string | number
   height?: string | number
   style?: CSSProperties
-  classname?: string
+  className?: string
 }
 
 export const BaseChart: React.FC<BaseChartProps> = ({

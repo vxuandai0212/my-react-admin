@@ -3,6 +3,7 @@ import { BaseChart, BaseChartProps } from '@/components/chart/BaseChart'
 import { COLOR } from '@/utils'
 
 interface LineChartProps extends BaseChartProps {
+  className?: string
   option: {
     legend: string[]
     x: string[] | number[]

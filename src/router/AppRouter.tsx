@@ -1,19 +1,26 @@
 import { withLoading } from '@/hocs/withLoading.hoc'
 import React, { useEffect, useState } from 'react'
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
-import './AppRouter.css'
 
 const LoginPage = React.lazy(() => import('@/pages/authentication/Login'))
 const SignupPage = React.lazy(() => import('@/pages/authentication/Signup'))
 const NoPermissionPage = React.lazy(() => import('@/pages/builtin/403'))
 const NotFoundPage = React.lazy(() => import('@/pages/builtin/404'))
 const ServiceErrorPage = React.lazy(() => import('@/pages/builtin/500'))
+const BasicLayoutPage = React.lazy(() => import('@/layouts/BasicLayout'))
+const InvoiceListPage = React.lazy(() => import('@/pages/invoice/list'))
+const InvoiceNewPage = React.lazy(() => import('@/pages/invoice/new'))
+const ReportPage = React.lazy(() => import('@/pages/report'))
 
 const Login = withLoading(LoginPage)
 const Signup = withLoading(SignupPage)
 const NoPermission = withLoading(NoPermissionPage)
 const NotFound = withLoading(NotFoundPage)
 const ServiceError = withLoading(ServiceErrorPage)
+const BasicLayout = withLoading(BasicLayoutPage)
+const InvoiceList = withLoading(InvoiceListPage)
+const InvoiceNew = withLoading(InvoiceNewPage)
+const Report = withLoading(ReportPage)
 
 export const AppRouter: React.FC = () => {
   return (
@@ -46,6 +53,11 @@ const TransitionRoute: React.FC = () => {
         <Route path='403' element={<NoPermission />} />
         <Route path='404' element={<NotFound />} />
         <Route path='500' element={<ServiceError />} />
+        <Route path='/' element={<BasicLayout />}>
+          <Route path='report' element={<Report />} />
+          <Route path='invoice' element={<InvoiceList />} />
+          <Route path='invoice/new' element={<InvoiceNew />} />
+        </Route>
       </Routes>
     </div>
   )

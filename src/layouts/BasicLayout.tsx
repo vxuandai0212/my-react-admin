@@ -20,6 +20,7 @@ import RIcon from '@/components/icon/RIcon'
 import { useTranslation } from 'react-i18next'
 import { Popover } from 'antd'
 import { useState } from 'react'
+import Avatar from '@/assets/images/avatar.png'
 
 const BasicLayout: React.FC = () => {
   const { isMobile } = useScreen()
@@ -155,7 +156,7 @@ const BasicLayout: React.FC = () => {
               <div className='p-8-0-18-19 flex basis-56px grow-0 shrink-0 items-center gap-15 cursor-pointer relative'>
                 <img
                   className='width-30 height-30 rounded-5 m-0-9-0-9'
-                  src='@/assets/images/avatar.png'
+                  src={Avatar}
                   alt='Avatar'
                 />
                 <div className='absolute width-12 height-12 left-51 bottom-14 background-color-success rounded-50 border-color-white border-2'></div>

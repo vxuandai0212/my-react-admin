@@ -9,14 +9,7 @@ const COLOR = {
   warning: '#F4BE5E',
 }
 
-export interface EventCardProps {
-  date: number
-  title: I18nType.I18nKey
-  description: I18nType.I18nKey
-  color: 'primary' | 'success' | 'danger' | 'warning'
-}
-
-const EventCard: React.FC<EventCardProps> = ({
+const EventCard: React.FC<Card.EventCard> = ({
   date,
   title,
   description,

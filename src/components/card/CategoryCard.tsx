@@ -2,7 +2,7 @@ import { useNumber } from '@/hooks/use-number'
 import { useTranslation } from 'react-i18next'
 import RIcon from '@/components/icon/RIcon'
 
-const CategoryCard: React.FC<CategoryCardProps> = ({
+const CategoryCard: React.FC<Card.CategoryCard> = ({
   title,
   value,
   icon,

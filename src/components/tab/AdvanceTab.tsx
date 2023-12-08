@@ -1,15 +1,8 @@
 import { useTranslation } from 'react-i18next'
 import RIcon from '../icon/RIcon'
 
-type Tab = {
-  key: any
-  label: I18nType.I18nKey
-  description: I18nType.I18nKey
-  icon: LocalIcon
-}
-
 interface Props {
-  tabs: Tab[]
+  tabs: Tab.AdvanceTabItem[]
   active?: any
   onChooseTab: (v: any) => void
 }

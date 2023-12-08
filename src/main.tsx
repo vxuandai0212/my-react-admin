@@ -6,6 +6,8 @@ import i18next from 'i18next'
 import { BarLoading } from './components/loading/BarLoading.tsx'
 import setupAssets from './plugins/assets.ts'
 import { setupI18n } from './locales/index.ts'
+import { Provider } from 'react-redux'
+import { store } from '@/store/store'
 
 async function setupApp() {
   setupAssets()
@@ -25,10 +27,12 @@ setupApp()
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <I18nextProvider i18n={i18next}>
-      <Suspense fallback={<BarLoading />}>
-        <App />
-      </Suspense>
-    </I18nextProvider>
+    <Provider store={store}>
+      <I18nextProvider i18n={i18next}>
+        <Suspense fallback={<BarLoading />}>
+          <App />
+        </Suspense>
+      </I18nextProvider>
+    </Provider>
   </React.StrictMode>
 )

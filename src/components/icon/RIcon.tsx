@@ -61,10 +61,11 @@ const RIcon: React.FC<{
   width?: string
   height?: string
   fill?: string
-}> = ({ icon = 'add', className, width, height, fill }) => {
+  onClick?: () => void
+}> = ({ icon = 'add', className, width, height, fill, onClick }) => {
   const Icon = ICON[icon]
   return (
-    <Icon className={className} width={width} height={height} fill={fill} />
+    <Icon onClick={onClick} className={className} width={width} height={height} fill={fill} />
   )
 }
 

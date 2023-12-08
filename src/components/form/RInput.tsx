@@ -11,6 +11,7 @@ interface Props {
   disabled?: boolean,
   value: string,
   onInput: (e: string) => void
+  className?: string
 }
 
 const RInput: React.FC<Props> = ({
@@ -21,7 +22,8 @@ const RInput: React.FC<Props> = ({
   type,
   disabled,
   value,
-  onInput
+  onInput,
+  className
 }) => {
   const { t } = useTranslation()
   const [errorMessage, setErrorMessage] = useState<string>('')
@@ -64,7 +66,7 @@ const RInput: React.FC<Props> = ({
     value && value.trim() !== '' ? 'var(--primary-dark)' : 'var(--primary-grey)'
 
   return (
-    <div>
+    <div className={`${className}`}>
       <div
         className={`color-primary-grey font-size-14 font-400 line-height-21 cursor-default ${
           isRequired ? 'required' : ''

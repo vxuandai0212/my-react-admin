@@ -12,6 +12,7 @@ interface Props {
   disabled?: boolean
   options: any
   onUpdateValue: (v: string) => void
+  className?: string
 }
 
 const RSelect: React.FC<Props> = ({
@@ -23,6 +24,7 @@ const RSelect: React.FC<Props> = ({
   disabled,
   options,
   onUpdateValue,
+  className
 }) => {
   const { t } = useTranslation()
   const [errorMessage, setErrorMessage] = useState<I18nType.I18nKey>(null!)
@@ -89,7 +91,7 @@ const RSelect: React.FC<Props> = ({
   )
 
   return (
-    <div>
+    <div className={`${className}`}>
       <div
         className={`color-primary-grey font-size-14 font-400 line-height-21 cursor-default ${
           isRequired ? 'required' : ''

@@ -177,10 +177,10 @@ function App() {
   }
 
   const [categoryCardData, setCategoryCardData] =
-    useState<CategoryCardProps[]>()
+    useState<Card.CategoryCard[]>()
 
   function setData(value: ApiReport.PopularCategory[]) {
-    const temp = value.map(function (i): CategoryCardProps {
+    const temp = value.map(function (i): Card.CategoryCard {
       return {
         icon: ICON_MAP[i.type],
         title: I18N_MAP[i.type],

@@ -1,17 +1,6 @@
 import { useTranslation } from 'react-i18next'
 
-interface SimpleTabItem {
-  label: string
-  value: any
-}
-
-interface SimpleTabProps {
-  tabs: SimpleTabItem[]
-  activeTab: any
-  onChooseTab: (v: any) => void
-}
-
-const SimpleTab: React.FC<SimpleTabProps> = ({
+const SimpleTab: React.FC<Tab.SimpleTab> = ({
   tabs,
   activeTab,
   onChooseTab,
@@ -20,6 +9,7 @@ const SimpleTab: React.FC<SimpleTabProps> = ({
   const renderTabs = tabs.map((item) => {
     return (
       <div
+        key={item.label}
         className={`grow-0 shrink-0 hover:background-color-info hover:border-color-info hover:color-white cursor-pointer rounded-8 border-1 border-solid p-11-29-11-29 font-size-14 font-700 transition ${
           item.value === activeTab
             ? 'color-primary-dark border-color-resting-outline'

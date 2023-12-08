@@ -5,25 +5,10 @@ import RIcon from '../icon/RIcon'
 import IconButton from '../button/IconButton'
 import { useState } from 'react'
 import { Popover } from 'antd'
-
-interface Format {
-  type: 'datetime' | 'currency'
-  value: any
-}
-
-interface Header {
-  key?: string
-  label: string
-  type: 'text' | 'tag' | 'icon-text' | 'image-text'
-  format?: Format
-  style?: 'italic' | 'bold'
-  align?: 'left' | 'center' | 'right'
-  showLabel?: boolean
-  width?: number
-}
+import Avatar from '@/assets/images/avatar.png'
 
 interface Props {
-  headers: Array<Header>
+  headers: Array<Table.Header>
   data: Array<any>
 }
 
@@ -130,7 +115,7 @@ const Table: React.FC<Props> = ({ headers, data }) => {
           <>
             <img
               className='width-36 height-36 rounded-6'
-              src={'@/assets/images/avatar.png'}
+              src={Avatar}
               alt='image'
             />
             <div className='ml-12'>{getFormatText(key, value.text)}</div>
