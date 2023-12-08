@@ -29,6 +29,9 @@ dependencies:
   echarts-for-react:
     specifier: ^3.0.2
     version: 3.0.2(echarts@5.4.3)(react@18.2.0)
+  emoji-picker-react:
+    specifier: ^4.5.16
+    version: 4.5.16(react@18.2.0)
   form-data:
     specifier: ^4.0.0
     version: 4.0.0
@@ -65,9 +68,6 @@ dependencies:
   react-router-dom:
     specifier: ^6.20.1
     version: 6.20.1(react-dom@18.2.0)(react@18.2.0)
-  react-transition-group:
-    specifier: ^4.4.5
-    version: 4.4.5(react-dom@18.2.0)(react@18.2.0)
   sort-by:
     specifier: ^1.2.0
     version: 1.2.0
@@ -97,9 +97,6 @@ devDependencies:
   '@types/react-dom':
     specifier: ^18.2.15
     version: 18.2.17
-  '@types/react-transition-group':
-    specifier: ^4.4.10
-    version: 4.4.10
   '@typescript-eslint/eslint-plugin':
     specifier: ^6.10.0
     version: 6.13.1(@typescript-eslint/parser@6.13.1)(eslint@8.54.0)(typescript@5.3.2)
@@ -1239,12 +1236,6 @@ packages:
     dependencies:
       '@types/react': 18.2.42
 
-  /@types/react-transition-group@4.4.10:
-    resolution: {integrity: sha512-hT/+s0VQs2ojCX823m60m5f0sL5idt9SO6Tj6Dg+rdphGPIeJbJ6CxvBYkgkGKrYeDjvIpKTR38UzmtHJOGW3Q==}
-    dependencies:
-      '@types/react': 18.2.42
-    dev: true
-
   /@types/react@18.2.42:
     resolution: {integrity: sha512-c1zEr96MjakLYus/wPnuWDo1/zErfdU9rNsIGmE+NV71nx88FG9Ttgo5dqorXTu/LImX2f63WBP986gJkMPNbA==}
     dependencies:
@@ -2065,13 +2056,6 @@ packages:
       esutils: 2.0.3
     dev: true
 
-  /dom-helpers@5.2.1:
-    resolution: {integrity: sha512-nRCa7CK3VTrM2NmGkIy4cbK7IZlgBE/PYMn55rrXefr5xXDP0LdtfPnblFDoVdcAfslJ7or6iqAUnx0CCGIWQA==}
-    dependencies:
-      '@babel/runtime': 7.23.4
-      csstype: 3.1.2
-    dev: false
-
   /duplexer@0.1.2:
     resolution: {integrity: sha512-jtD6YG370ZCIi/9GTaJKQxWTZD045+4R4hTk/x1UyoqadyJ9x9CgSi1RlVDQF8U2sxLLSnFkCaMihqljHIWgMg==}
     dev: true
@@ -2102,6 +2086,15 @@ packages:
   /electron-to-chromium@1.4.596:
     resolution: {integrity: sha512-zW3zbZ40Icb2BCWjm47nxwcFGYlIgdXkAx85XDO7cyky9J4QQfq8t0W19/TLZqq3JPQXtlv8BPIGmfa9Jb4scg==}
     dev: true
+
+  /emoji-picker-react@4.5.16(react@18.2.0):
+    resolution: {integrity: sha512-RXaOH1EapmqbtRSMaHnwJWMfA6kiPipg/gN4cFOQRQKvrTQIA3K5+yUyzFuq8O7umIEtXUi1C1tf2dPvyyn44Q==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      react: '>=16'
+    dependencies:
+      react: 18.2.0
+    dev: false
 
   /emoji-regex@8.0.0:
     resolution: {integrity: sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==}
@@ -3929,20 +3922,6 @@ packages:
     dependencies:
       '@remix-run/router': 1.13.1
       react: 18.2.0
-    dev: false
-
-  /react-transition-group@4.4.5(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-pZcd1MCJoiKiBR2NRxeCRg13uCXbydPnmB4EOeRrY7480qNWO8IIgQG6zlDkm6uRMsURXPuKq0GWtiM59a5Q6g==}
-    peerDependencies:
-      react: '>=16.6.0'
-      react-dom: '>=16.6.0'
-    dependencies:
-      '@babel/runtime': 7.23.4
-      dom-helpers: 5.2.1
-      loose-envify: 1.4.0
-      prop-types: 15.8.1
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
     dev: false
 
   /react@18.2.0:

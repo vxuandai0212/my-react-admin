@@ -32,8 +32,6 @@ const BasicLayout: React.FC = () => {
 
   const app = useAppSelector((state) => state.app)
 
-  const auth = useAppSelector((state) => state.auth)
-
   const collapsed = app.siderCollapse
 
   const routes = [
