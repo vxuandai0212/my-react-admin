@@ -9,7 +9,6 @@ export function useLoading(initValue = false) {
   } = useBoolean(initValue)
 
   useEffect(() => {
-    console.log(`useLoading ${loading}`)
   }, [loading])
 
   return {

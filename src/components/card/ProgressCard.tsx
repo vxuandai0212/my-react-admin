@@ -38,7 +38,7 @@ const ProgressCard: React.FC<Card.ProgressCard> = ({
   }
   return (
     <div
-      className={`height-98 p-14-22-20-26 flex flex-col grow gap-15 rounded-12 transition background-color-${backgroundColor} ${className}`}
+      className={`height-98 p-14-22-20-26 flex flex-col grow gap-5 rounded-12 transition background-color-${backgroundColor} ${className}`}
     >
       <div className='flex justify-between items-center'>
         <div>
@@ -58,7 +58,7 @@ const ProgressCard: React.FC<Card.ProgressCard> = ({
             icon='arrow'
             width='12px'
             height='12px'
-            className={`${trend === 'down' ? 'rotate-x-180' : ''} fill-${trendColor()}`}
+            className={`fill-${trendColor()} ${trend === 'down' ? 'rotate-x-180' : ''}`}
           />
         </div>
       </div>

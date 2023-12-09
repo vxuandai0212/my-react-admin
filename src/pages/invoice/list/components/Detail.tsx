@@ -1,13 +1,14 @@
 import RIcon from '@/components/icon/RIcon'
 import RTag from '@/components/tag/RTag'
-import { useClickOutside, useDatetime } from '@/hooks'
+import { useDatetime } from '@/hooks'
 import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import EmojiPicker from 'emoji-picker-react'
 import PrimaryButton from '@/components/button/PrimaryButton'
 import Avatar from '@/assets/images/avatar.png'
+import useClick from '@/hooks/use-click'
 
-const InvoiceDetail = () => {
+const InvoiceDetail: React.FC = () => {
   const { t } = useTranslation()
   const { datetime } = useDatetime()
   const sampleDate1 = datetime(1683533878000).format('DD MMM YYYY')
@@ -15,46 +16,49 @@ const InvoiceDetail = () => {
 
   const chatContainerRef: any = useRef(null)
   const commentInputRef: any = useRef(null)
-  const chatListHeight = useRef(570)
+  const [chatListHeight, setChatListHeight] = useState<number>(570)
   const [showEmojiPicker, setShowEmojiPicker] = useState<boolean>(false)
-  const emojiPickerRef = useRef<HTMLElement>(null!)
-  const emojiIconRef = useRef<HTMLElement>(null!)
+  const emojiPickerRef = useRef<any>(null!)
+  const emojiIconRef = useRef<any>(null!)
   useEffect(() => {
-    chatContainerRef.value.scrollTo(0, chatContainerRef.value.scrollHeight)
+    chatContainerRef.current.scrollTo(0, chatContainerRef.current.scrollHeight)
   })
 
-  const isClickOutsided = useClickOutside([emojiIconRef, emojiPickerRef])
+  const { el } = useClick()
 
   useEffect(() => {
-    if (isClickOutsided) {
+    if (
+      el &&
+      !emojiPickerRef.current.contains(el) &&
+      !emojiIconRef.current.contains(el) &&
+      showEmojiPicker
+    ) {
       setShowEmojiPicker(false)
-    } else {
-      setShowEmojiPicker(true)
     }
-  }, [isClickOutsided])
+  }, [el])
 
   function growHeight(el: any) {
-    const newChatListHeight = 590 - el.target.offsetHeight
-    if (newChatListHeight !== chatListHeight.current) {
-      chatListHeight.current = newChatListHeight
-      commentInputRef.current.scrollTo(0, commentInputRef.value.scrollHeight)
+    const newChatListHeight = 590 - el.offsetHeight
+    if (newChatListHeight !== chatListHeight) {
+      setChatListHeight(newChatListHeight)
+      commentInputRef.current.scrollTo(0, commentInputRef.current.scrollHeight)
     }
   }
 
   function onSelectEmoji(emoji: any) {
-    commentInputRef.value.innerHTML += emoji.i
+    commentInputRef.current.innerHTML += emoji.emoji
   }
 
   function onClickEmotionPicker() {
     setShowEmojiPicker(true)
   }
   return (
-    <div className='flex flex-col'>
+    <div className={`flex flex-col`}>
       <div className='flex basis-50px p-0-30-0-29 items-center justify-between'>
-        <div className='color-primary-grey font-size-14 font-700 line-height-21 height-36'>
+        <div className='flex items-center color-primary-grey font-size-14 font-700 line-height-21 height-36'>
           {t('page.invoice.detail.label')} #AA-04-19-1890
         </div>
-        <RIcon icon='three-dot' />
+        <RIcon width='12' height='2' icon='three-dot' />
       </div>
       <div className='flex <lg:flex-col'>
         <div className='basis-3/5 <lg:basis-1 p-10-30-83-29'>
@@ -219,7 +223,7 @@ const InvoiceDetail = () => {
             <div
               className='mt-30 flex flex-col gap-21 transition'
               style={{ overflowY: 'scroll', maxHeight: `${chatListHeight}px` }}
-              ref='chatContainerRef'
+              ref={chatContainerRef}
             >
               <div className='self-start flex-col gap-5'>
                 <div className='flex gap-8'>
@@ -432,7 +436,7 @@ const InvoiceDetail = () => {
           </div>
           <div className='flex justify-between background-color-background-light items-center flex-grow'>
             <div
-              ref='commentInputRef'
+              ref={commentInputRef}
               data-text='Add your comment'
               role='textbox'
               onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -449,25 +453,36 @@ const InvoiceDetail = () => {
             <div className='flex gap-11 items-center pr-30'>
               <div className='flex items-center gap-9 relative'>
                 <div
-                  ref='emojiPickerRef'
+                  ref={emojiPickerRef}
                   style={{
-                    bottom: '30px',
+                    bottom: '50px',
                     opacity: `${showEmojiPicker ? 1 : 0}`,
-                    left: `${showEmojiPicker ? '-126px' : '160px'}`,
+                    right: `${showEmojiPicker ? '-108px' : '-1008px'}`,
                     zIndex: `${showEmojiPicker ? 1 : -1}`,
                   }}
                   className='absolute transition'
                 >
-                  <EmojiPicker onEmojiClick={onSelectEmoji} />
+                  <EmojiPicker
+                    previewConfig={{ showPreview: false }}
+                    onEmojiClick={onSelectEmoji}
+                  />
                 </div>
-                <div ref='emojiIconRef'>
+
+                <div ref={emojiIconRef}>
                   <RIcon
+                    width='16'
+                    height='16'
                     icon='emoticon'
                     onClick={onClickEmotionPicker}
                     className='fill-primary-grey cursor-pointer'
                   />
                 </div>
-                <RIcon icon='attach' className='fill-primary-grey' />
+                <RIcon
+                  width='13'
+                  height='15'
+                  icon='attach'
+                  className='fill-primary-grey'
+                />
               </div>
               <PrimaryButton className='p-9-33-8-34' label='button.send' />
             </div>

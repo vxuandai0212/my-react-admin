@@ -1,4 +1,4 @@
-import { LineChart } from '@/components/chart/LineChart'
+import { LineChart, LineChartProps } from '@/components/chart/LineChart'
 import { BarLoading } from '@/components/loading/BarLoading'
 import { useLoading, useNumber } from '@/hooks'
 import { fetchSmoking } from '@/service'
@@ -12,7 +12,7 @@ const Smoking: React.FC<{ className?: string }> = ({ className }) => {
 
   const { loading, startLoading, endLoading } = useLoading(false)
 
-  const [chartData, setChartDataState] = useState<any>()
+  const [chartData, setChartDataState] = useState<LineChartProps['option']>()
 
   const [fromDate, setFromDate] = useState<number>(
     dayjs().startOf('day').valueOf()
@@ -28,22 +28,22 @@ const Smoking: React.FC<{ className?: string }> = ({ className }) => {
     const { men, women } = y
     const mapData = {
       legend: [
-        t('page.report.smokingChart.men'),
-        t('page.report.smokingChart.women'),
+        'page.report.smokingChart.men',
+        'page.report.smokingChart.women',
       ],
       x,
       y: [
         {
-          name: t('page.report.smokingChart.men'),
+          name: 'page.report.smokingChart.men',
           data: men,
         },
         {
-          name: t('page.report.smokingChart.women'),
+          name: 'page.report.smokingChart.women',
           data: women,
         },
       ],
       yAxis: {
-        name: t('page.report.smokingChart.unit'),
+        name: 'page.report.smokingChart.unit',
       },
     }
     setChartDataState(mapData)
@@ -71,29 +71,31 @@ const Smoking: React.FC<{ className?: string }> = ({ className }) => {
   return (
     <div className={`${className}`}>
       {loading ? (
-        <BarLoading className='height-320 grow' />
+        <BarLoading className='height-320 grow flex justify-center items-center w-full' />
       ) : (
-        <>
-          <LineChart option={chartData} className='height-270 grow' />
-          <div className='height-75 border-top-1 border-top-solid border-top-color-border flex'>
-            <div className='flex flex-col justify-center items-center grow border-right-1 border-right-solid border-right-color-border'>
-              <div className='color-primary-dark font-size-16 font-700 line-height-24'>
-                {menSale}
+        chartData && (
+          <>
+            <LineChart option={chartData} className='height-270 grow overflow-hidden' />
+            <div className='height-75 border-top-1 border-top-solid border-top-color-border flex'>
+              <div className='flex flex-col justify-center items-center grow border-right-1 border-right-solid border-right-color-border'>
+                <div className='color-primary-dark font-size-16 font-700 line-height-24'>
+                  {menSale}
+                </div>
+                <div className='color-primary-grey font-size-14 font-400 line-height-21'>
+                  {t('page.report.smokingChart.menSale')}
+                </div>
               </div>
-              <div className='color-primary-grey font-size-14 font-400 line-height-21'>
-                {t('page.report.smokingChart.menSale')}
+              <div className='flex flex-col justify-center items-center grow'>
+                <div className='color-primary-dark font-size-16 font-700 line-height-24'>
+                  {womenSale}
+                </div>
+                <div className='color-primary-grey font-size-14 font-400 line-height-21'>
+                  {t('page.report.smokingChart.womenSale')}
+                </div>
               </div>
             </div>
-            <div className='flex flex-col justify-center items-center grow'>
-              <div className='color-primary-dark font-size-16 font-700 line-height-24'>
-                {womenSale}
-              </div>
-              <div className='color-primary-grey font-size-14 font-400 line-height-21'>
-                {t('page.report.smokingChart.womenSale')}
-              </div>
-            </div>
-          </div>
-        </>
+          </>
+        )
       )}
     </div>
   )

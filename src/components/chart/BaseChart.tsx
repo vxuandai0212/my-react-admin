@@ -1,7 +1,7 @@
-import React, { CSSProperties, useEffect, useState } from 'react'
+import React, { CSSProperties, useEffect, useRef } from 'react'
 import { EChartsOption } from 'echarts-for-react'
 import ReactECharts from 'echarts-for-react'
-import { BarLoading } from '@/components/loading/BarLoading'
+import { useTranslation } from 'react-i18next'
 
 export interface BaseChartProps {
   option?: EChartsOption
@@ -20,22 +20,20 @@ export const BaseChart: React.FC<BaseChartProps> = ({
   style,
   ...props
 }) => {
-  const [loading, setLoading] = useState(true)
-
   const chartHeight = height || '400px'
 
-  useEffect(() => {
-    // TODO FIXME workaround to make sure that parent container is initialized before the chart
-    setTimeout(() => {
-      setLoading(false)
-    }, 1000 / 2)
-  }, [])
+  const eChartRef = useRef<any>(null!)
 
-  return loading ? (
-    <BarLoading />
-  ) : (
+  const { i18n } = useTranslation()
+
+  useEffect(() => {
+    eChartRef.current.resize()
+  }, [i18n.language])
+
+  return (
     <ReactECharts
       {...props}
+      ref={eChartRef}
       option={{ ...option }}
       style={{
         ...style,

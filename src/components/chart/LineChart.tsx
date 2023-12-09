@@ -1,8 +1,9 @@
 import React from 'react'
 import { BaseChart, BaseChartProps } from '@/components/chart/BaseChart'
 import { COLOR } from '@/utils'
+import { useTranslation } from 'react-i18next'
 
-interface LineChartProps extends BaseChartProps {
+export interface LineChartProps extends BaseChartProps {
   className?: string
   option: {
     legend: string[]
@@ -12,12 +13,13 @@ interface LineChartProps extends BaseChartProps {
       data: any[]
     }[]
     yAxis?: {
-      name?: string
+      name?: any
     }
   }
 }
 
 export const LineChart: React.FC<LineChartProps> = ({ option, ...props }) => {
+  const {t} = useTranslation()
   const defaultLineOption = {
     tooltip: {
       trigger: 'axis',
@@ -29,7 +31,7 @@ export const LineChart: React.FC<LineChartProps> = ({ option, ...props }) => {
       },
     },
     legend: {
-      data: option.legend,
+      data: option.legend.map(i => t(i)),
       textStyle: {
         fontStyle: 'normal',
         fontFamily: 'Lato',
@@ -58,7 +60,7 @@ export const LineChart: React.FC<LineChartProps> = ({ option, ...props }) => {
     ],
     yAxis: [
       {
-        name: option.yAxis?.name,
+        name: t(option.yAxis?.name),
         type: 'value',
         axisLabel: {
           fontStyle: 'normal',
@@ -77,7 +79,7 @@ export const LineChart: React.FC<LineChartProps> = ({ option, ...props }) => {
     ],
     series: option.y.map((i, index) => ({
       color: COLOR[index],
-      name: i.name,
+      name: t(i.name),
       type: 'line',
       smooth: true,
       stack: 'Total',

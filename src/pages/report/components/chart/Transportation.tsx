@@ -1,21 +1,13 @@
 import IconButton from '@/components/button/IconButton'
-import { PieChart } from '@/components/chart/PieChart'
+import { PieChart, PieChartProps } from '@/components/chart/PieChart'
 import { BarLoading } from '@/components/loading/BarLoading'
 import SimpleTab from '@/components/tab/SimpleTab'
 import { useLoading } from '@/hooks'
 import { fetchTransportation } from '@/service'
-import { DatePicker, DatePickerProps } from 'antd'
-import { RangePickerProps } from 'antd/es/date-picker'
 import dayjs from 'dayjs'
 import { useEffect, useState } from 'react'
-import { useTranslation } from 'react-i18next'
-
-const { RangePicker } = DatePicker
 
 const Transportation: React.FC<{ className?: string }> = ({ className }) => {
-  const { t } = useTranslation()
-  const [showDatePicker, setShowDatePicker] = useState<boolean>(false)
-
   const dateFilters: Tab.SimpleTabItem[] = [
     {
       label: 'common.tab.day',
@@ -60,13 +52,13 @@ const Transportation: React.FC<{ className?: string }> = ({ className }) => {
     walking: 'page.report.transportationChart.walking',
   }
 
-  const [chartData, setChartDataState] = useState<any>()
+  const [chartData, setChartDataState] = useState<PieChartProps['option']>()
 
   function setChartData(data: ApiReport.Transportation[]) {
     const mapData = {
-      name: t('page.report.transportationChart.title'),
+      name: 'page.report.transportationChart.title',
       data: data.map((i) => {
-        i.name = t(I18N_MAP[i.name])
+        i.name = I18N_MAP[i.name]
         return i
       }),
     }
@@ -92,20 +84,6 @@ const Transportation: React.FC<{ className?: string }> = ({ className }) => {
     init()
   }, [])
 
-  const onChange = (
-    value: DatePickerProps['value'] | RangePickerProps['value'],
-    dateString: [string, string] | string
-  ) => {
-    console.log('Selected Time: ', value)
-    console.log('Formatted Selected Time: ', dateString)
-  }
-
-  const onOk = (
-    value: DatePickerProps['value'] | RangePickerProps['value']
-  ) => {
-    console.log('onOk: ', value)
-  }
-
   return (
     <div className={`${className}`}>
       <div className='flex gap-8 p-0-23-0-28 items-center overflow-x-no-scrollbar relative'>
@@ -114,24 +92,12 @@ const Transportation: React.FC<{ className?: string }> = ({ className }) => {
           tabs={dateFilters}
           activeTab={'day'}
         />
-        <IconButton
-          onClick={() => setShowDatePicker(true)}
-          icon='date'
-          className='grow-0 shrink-0'
-        />
-        <RangePicker
-          open={showDatePicker}
-          onOpenChange={(visible) => setShowDatePicker(visible)}
-          showTime={{ format: 'HH:mm' }}
-          format='YYYY-MM-DD HH:mm'
-          onChange={onChange}
-          onOk={onOk}
-        />
+        <IconButton icon='date' className='grow-0 shrink-0' />
       </div>
       {loading ? (
-        <BarLoading className='height-320 grow' />
+        <BarLoading className='height-320 grow flex justify-center items-center w-full' />
       ) : (
-        <PieChart option={chartData} className='height-320 grow' />
+        chartData && <PieChart option={chartData} className='height-320 grow overflow-hidden' />
       )}
     </div>
   )

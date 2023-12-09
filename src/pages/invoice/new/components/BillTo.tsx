@@ -95,7 +95,7 @@ const BillTo: React.FC<{ className: string }> = ({ className }) => {
     }))
   }
   return (
-    <div className={`flex flex-col gap-15 ${className}`}>
+    <div className={`flex flex-col gap-30 ${className}`}>
       <Dragger {...props}>
         <div className='flex justify-center items-center gap-5 height-206'>
           <RIcon icon='upload' className='fill-primary-dark width-18' />

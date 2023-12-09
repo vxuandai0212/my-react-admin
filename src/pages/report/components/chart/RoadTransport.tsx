@@ -1,15 +1,13 @@
-import { BarChart } from '@/components/chart/BarChart'
+import { BarChart, BarChartProps } from '@/components/chart/BarChart'
 import { BarLoading } from '@/components/loading/BarLoading'
 import { useLoading } from '@/hooks'
 import { fetchRoadTransportSpend } from '@/service'
 import { useEffect, useState } from 'react'
-import { useTranslation } from 'react-i18next'
 
 const RoadTransport: React.FC<{ className?: string }> = ({ className }) => {
-  const { t } = useTranslation()
   const { loading, startLoading, endLoading } = useLoading(false)
 
-  const [chartData, setChartDataState] = useState<any>()
+  const [chartData, setChartDataState] = useState<BarChartProps['option']>()
 
   const I18N_MAP: { [key: string]: I18nType.I18nKey } = {
     italia: 'page.report.roadTransportSpendChart.italia',
@@ -23,11 +21,11 @@ const RoadTransport: React.FC<{ className?: string }> = ({ className }) => {
     const mapData = {
       dimensions,
       source: source.map((i) => {
-        i.country = t(I18N_MAP[i.country])
+        i.country = I18N_MAP[i.country]
         return i
       }),
       yAxis: {
-        name: t('page.report.roadTransportSpendChart.unit'),
+        name: 'page.report.roadTransportSpendChart.unit',
       },
     }
     setChartDataState(mapData)
@@ -55,9 +53,9 @@ const RoadTransport: React.FC<{ className?: string }> = ({ className }) => {
   return (
     <div className={`flex justify-center items-end ${className}`}>
       {loading ? (
-        <BarLoading className='height-320 grow' />
+        <BarLoading className='height-320 grow flex justify-center items-center w-full' />
       ) : (
-        <BarChart option={chartData} className='height-270 grow' />
+        chartData && <BarChart option={chartData} className='height-270 w-full overflow-hidden' />
       )}
     </div>
   )

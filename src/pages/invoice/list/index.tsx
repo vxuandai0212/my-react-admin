@@ -13,6 +13,7 @@ import { useTranslation } from 'react-i18next'
 import InvoiceDetail from './components/Detail'
 import Avatar from '@/assets/images/avatar.png'
 import Company from '@/assets/images/company.png'
+import './index.css'
 
 const InvoiceList = () => {
   const { isNotPC } = useScreen()
@@ -278,6 +279,12 @@ const InvoiceList = () => {
     init()
   }, [])
 
+  const handleCommand = (args: any) => {
+    if (args.key === 'page.invoice.command.edit') {
+      handleEditInvoice(args.value)
+    }
+  }
+
   const { t } = useTranslation()
 
   const siderEl = document.getElementById('sider')
@@ -345,9 +352,15 @@ const InvoiceList = () => {
             <div className='overflow-x-no-scrollbar'>
               <div className='flex flex-col gap-36 h-full min-w-1000px'>
                 {!loading ? (
-                  <Table headers={headers} data={table.items} />
+                  <Table
+                    headers={headers}
+                    data={table.items}
+                    handleCommand={handleCommand}
+                  />
                 ) : (
-                  <BarLoading />
+                  <div className='flex justify-center items-center h-full'>
+                    <BarLoading />
+                  </div>
                 )}
 
                 <div className='flex justify-end p-0-25-0-25 basis-34px grow-0 shrink-0 overflow-hidden'>
@@ -356,17 +369,22 @@ const InvoiceList = () => {
                     pageSize={table.filter.limit}
                     pageSizeOptions={[10, 20, 30, 50]}
                     total={table.total}
-                    showQuickJumper
-                    showSizeChanger
+                    showSizeChanger={false}
                     onChange={handlePageChange}
-                    onShowSizeChange={handlePageSizeChange}
                   />
                 </div>
               </div>
             </div>
-            <Modal open={showModal}>
+            <Modal
+              open={showModal}
+              centered
+              width='auto'
+              footer={<div />}
+              closeIcon={null}
+              onCancel={(e) => setShowModal(false)}
+            >
               <div
-                className='rounded-4 background-color-white width-1079'
+                className='rounded-4 background-color-white width-1079 height-814 overflow-hidden'
                 style={{
                   boxShadow: `0px 6px 16px 0px rgba(153, 155, 168, 0.1)`,
                 }}

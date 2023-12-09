@@ -47,7 +47,7 @@ const Report = () => {
     </>
   )
   return (
-    <div className='flex'>
+    <div className='flex grow'>
       <div className='2xl:basis-1/4 <2xl:basis-0 grow-0 shrink-0 background-color-white h-screen overflow-y-no-scrollbar'>
         <div className='grid grid-cols-3'>
           {isNotPC

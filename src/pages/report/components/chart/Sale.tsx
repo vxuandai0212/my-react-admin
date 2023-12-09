@@ -1,4 +1,4 @@
-import { PolarBarChart } from '@/components/chart/PolarBarChart'
+import { PolarBarChart, PolarBarProps } from '@/components/chart/PolarBarChart'
 import { BarLoading } from '@/components/loading/BarLoading'
 import { useLoading } from '@/hooks'
 import { fetchSale } from '@/service'
@@ -9,7 +9,7 @@ const Sale: React.FC<{ className?: string }> = ({ className }) => {
   const { t } = useTranslation()
   const { loading, startLoading, endLoading } = useLoading(false)
 
-  const [chartData, setChartDataState] = useState<any>()
+  const [chartData, setChartDataState] = useState<PolarBarProps['option']>()
 
   const I18N_MAP: { [key: string]: I18nType.I18nKey } = {
     housing: 'page.report.saleChart.housing',
@@ -23,7 +23,7 @@ const Sale: React.FC<{ className?: string }> = ({ className }) => {
   function setChartData(data: ApiReport.Sale) {
     const { dimensions, source } = data
     const mapData = {
-      dimensions: dimensions.map((i) => t(I18N_MAP[i])),
+      dimensions: dimensions.map((i) => I18N_MAP[i]),
       source,
     }
     setChartDataState(mapData)
@@ -57,9 +57,9 @@ const Sale: React.FC<{ className?: string }> = ({ className }) => {
       </div>
       <div className='flex justify-center items-center grow'>
         {loading ? (
-          <BarLoading className='height-320 grow' />
+          <BarLoading className='height-320 grow flex justify-center items-center w-full' />
         ) : (
-          <PolarBarChart option={chartData} className='height-270 grow' />
+          chartData && <PolarBarChart option={chartData} className='height-270 grow overflow-hidden' />
         )}
       </div>
     </div>

@@ -27,7 +27,9 @@ const Description = () => {
         <div className='flex flex-col gap-28'>
           <div className='flex flex-col gap-28'>
             <div className='flex p-0-18-0-18 justify-between items-center background-color-FBFBFD rounded-8 height-50'>
-              <div>{t('page.invoice.detail.descriptionSection.item')}</div>
+              <div className='font-size-14 font-600 line-height-21'>
+                {t('page.invoice.detail.descriptionSection.item')}
+              </div>
               <div className='flex gap-7'>
                 <RIcon className='fill-primary-dark height-15' icon='delete' />
                 <div className='uppercase color-primary-dark font-size-12 font-900'>
@@ -66,7 +68,9 @@ const Description = () => {
           </div>
           <div className='flex flex-col gap-28'>
             <div className='flex p-0-18-0-18 justify-between items-center background-color-FBFBFD rounded-8 height-50'>
-              <div>{t('page.invoice.detail.descriptionSection.item')}</div>
+              <div className='font-size-14 font-600 line-height-21'>
+                {t('page.invoice.detail.descriptionSection.item')}
+              </div>
               <div className='flex gap-7'>
                 <RIcon className='fill-primary-dark height-15' icon='delete' />
                 <div className='uppercase color-primary-dark font-size-12 font-900'>

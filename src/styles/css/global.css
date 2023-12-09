@@ -9,6 +9,22 @@
   line-height: normal;
 }
 
+*:focus {
+  outline: none;
+}
+
+.fill-danger {
+  fill: var(--danger);
+}
+
+.fill-\#7CE7AC {
+  fill: #7ce7ac;
+}
+
+.fill-\#FF808B {
+  fill: #ff808b;
+}
+
 :disabled {
   cursor: not-allowed;
   background-color: transparent;

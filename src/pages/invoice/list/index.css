@@ -1,0 +1,10 @@
+.ant-modal-content {
+  padding: 0 !important;
+}
+
+ul.ant-pagination > li > a {
+  height: 100%!important;
+  display: flex!important;
+  justify-content: center!important;
+  align-items: center!important;
+}

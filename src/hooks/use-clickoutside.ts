@@ -1,15 +1,15 @@
-import { MutableRefObject, RefObject, useEffect, useRef } from 'react'
+import { RefObject, useEffect, useState } from 'react'
 
 type AnyEvent = MouseEvent | TouchEvent
 
 interface UseClickOutsideReturnVal {
-  isClickOutsided: MutableRefObject<boolean>
+  isClickOutsided: boolean
 }
 
 function useClickOutside<T extends HTMLElement = HTMLElement>(
   refs: RefObject<T>[]
 ): UseClickOutsideReturnVal {
-  const isClickOutsided = useRef(false)
+  const [isClickOutsided, setIsClickOutsided] = useState<boolean>(true)
   const isClickInsidePredicate = (ref: RefObject<T>, event: AnyEvent) => {
     const el = ref?.current
     return !el || el.contains(event.target as Node)
@@ -17,9 +17,8 @@ function useClickOutside<T extends HTMLElement = HTMLElement>(
 
   useEffect(() => {
     const listener = (event: AnyEvent) => {
-      isClickOutsided.current = refs.every(
-        (item) => !isClickInsidePredicate(item, event)
-      )
+      const bool = refs.every((item) => !isClickInsidePredicate(item, event))
+      setIsClickOutsided(bool)
     }
 
     document.addEventListener(`mousedown`, listener)

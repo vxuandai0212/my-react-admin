@@ -1,17 +1,41 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { BaseChart, BaseChartProps } from '@/components/chart/BaseChart'
+import { useTranslation } from 'react-i18next'
 
-interface BarChartProps extends BaseChartProps {
+export interface BarChartProps extends BaseChartProps {
   option: {
     dimensions: string[]
     source: { [key: string]: any }
     yAxis?: {
-      name?: string
+      name?: any
     }
   }
 }
 
 export const BarChart: React.FC<BarChartProps> = ({ option, ...props }) => {
+  const { t, i18n } = useTranslation()
+
+  useEffect(() => {
+    const source: any = []
+    for (let i = 0; i < option.source.length; i++) {
+      const opt = Object.assign({}, option.source[i])
+      opt.country = t(opt.country)
+      source.push(opt)
+    }
+
+    setBarOption((prevState) => ({
+      ...prevState,
+      dataset: {
+        ...prevState.dataset,
+        source,
+      },
+      yAxis: {
+        ...prevState.yAxis,
+        name: t(option.yAxis?.name),
+      },
+    }))
+  }, [i18n.language])
+
   const defaultBarOption = {
     grid: {
       bottom: '20px',
@@ -33,7 +57,7 @@ export const BarChart: React.FC<BarChartProps> = ({ option, ...props }) => {
       },
     },
     yAxis: {
-      name: option.yAxis?.name,
+      name: t(option.yAxis?.name),
       axisLabel: {
         fontStyle: 'normal',
         fontFamily: 'Lato',
@@ -59,5 +83,8 @@ export const BarChart: React.FC<BarChartProps> = ({ option, ...props }) => {
       barWidth: '5',
     })),
   }
-  return <BaseChart {...props} option={{ ...defaultBarOption }} />
+
+  const [barOption, setBarOption] = useState(defaultBarOption)
+
+  return <BaseChart {...props} option={{ ...barOption }} />
 }

@@ -3,9 +3,11 @@ import RIcon from '../icon/RIcon'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import IconButton from './IconButton'
+import { useNavigate } from 'react-router-dom'
 
 const AddButton: React.FC = () => {
   const { t } = useTranslation()
+  const navigate = useNavigate()
 
   const content = (
     <div style={{ maxHeight: '265px', overflowY: 'auto', width: '285px', overflowX: 'hidden' }}>
@@ -15,7 +17,7 @@ const AddButton: React.FC = () => {
         }
         onClick={() => {
           setOpenPopover(false)
-          // routerPush({ name: 'project_new' })
+          navigate('/invoice/new')
         }}
       >
         <div className={'flex gap-15 items-center'}>
@@ -39,7 +41,7 @@ const AddButton: React.FC = () => {
         }
         onClick={() => {
           setOpenPopover(false)
-          // routerPush({ name: 'task_new' })
+          navigate('/invoice/new')
         }}
       >
         <div className={'flex gap-15 items-center'}>
@@ -63,7 +65,7 @@ const AddButton: React.FC = () => {
         }
         onClick={() => {
           setOpenPopover(false)
-          // routerPush({ name: 'contact_new' })
+          navigate('/invoice/new')
         }}
       >
         <div className={'flex gap-15 items-center'}>
@@ -87,7 +89,7 @@ const AddButton: React.FC = () => {
         }
         onClick={() => {
           setOpenPopover(false)
-          // routerPush({ name: 'notification_new' })
+          navigate('/invoice/new')
         }}
       >
         <div className={'flex gap-15 items-center'}>
@@ -111,7 +113,7 @@ const AddButton: React.FC = () => {
         }
         onClick={() => {
           setOpenPopover(false)
-          // routerPush({ name: 'product_new' })
+          navigate('/invoice/new')
         }}
       >
         <div className={'flex gap-15 items-center'}>
@@ -135,7 +137,7 @@ const AddButton: React.FC = () => {
         }
         onClick={() => {
           setOpenPopover(false)
-          // routerPush({ name: 'invoice_new' })
+          navigate('/invoice/new')
         }}
       >
         <div className={'flex gap-15 items-center'}>

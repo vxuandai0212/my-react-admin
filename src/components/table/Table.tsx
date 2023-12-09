@@ -10,9 +10,10 @@ import Avatar from '@/assets/images/avatar.png'
 interface Props {
   headers: Array<Table.Header>
   data: Array<any>
+  handleCommand: (args: any) => void
 }
 
-const Table: React.FC<Props> = ({ headers, data }) => {
+const Table: React.FC<Props> = ({ headers, data, handleCommand }) => {
   const { t } = useTranslation()
   function isRenderCommandDropdown(item: any) {
     return item.commands && item.commands.length > 0
@@ -76,6 +77,7 @@ const Table: React.FC<Props> = ({ headers, data }) => {
   const renderHeader = headers.map((item) => {
     return (
       <div
+        key={item.label}
         className='color-primary-grey font-size-12 font-700 line-height-18'
         style={{
           width: `${item.width}%`,
@@ -90,7 +92,6 @@ const Table: React.FC<Props> = ({ headers, data }) => {
   const renderTableCell = (key: any, value: any) => {
     if (isShowField(key)) {
       if (isMatchType(key, 'tag')) {
-        console.log('tag')
         return <RTag label={value.value} type={value.type} />
       } else if (isMatchType(key, 'icon-text')) {
         return (
@@ -106,7 +107,12 @@ const Table: React.FC<Props> = ({ headers, data }) => {
                     #fff`,
               }}
             >
-              <RIcon className='fill-#5e81f4' width='18px' height='18px' icon='bill' />
+              <RIcon
+                className='fill-#5e81f4'
+                width='18px'
+                height='18px'
+                icon='bill'
+              />
             </div>
             <div className='ml-20'>{getFormatText(key, value.text)}</div>
           </>
@@ -150,19 +156,18 @@ const Table: React.FC<Props> = ({ headers, data }) => {
     Object.keys(item).forEach((key) => {
       const value = item[key]
       const rowData = (
-        <>
-          <div
-            className='color-primary-dark font-size-16 line-height-24 flex items-center cursor-default'
-            style={{
-              width: getWidth(key),
-              justifyContent: getJustifyContent(key),
-              fontStyle: getFontStyle(key),
-              fontWeight: getFontWeight(key),
-            }}
-          >
-            {renderTableCell(key, value)}
-          </div>
-        </>
+        <div
+          key={key}
+          className='color-primary-dark font-size-16 line-height-24 flex items-center cursor-default'
+          style={{
+            width: getWidth(key),
+            justifyContent: getJustifyContent(key),
+            fontStyle: getFontStyle(key),
+            fontWeight: getFontWeight(key),
+          }}
+        >
+          {renderTableCell(key, value)}
+        </div>
       )
       data.push(rowData)
     })
@@ -179,11 +184,16 @@ const Table: React.FC<Props> = ({ headers, data }) => {
               : 'primary-dark'
           return (
             <div
+              key={command.label}
               style={{ color: `var(--${color}` }}
               className='cursor-pointer p-12-20-13-17 font-size-14 font-700 hover:color-primary hover:background-color-background-extra-light transition'
               onClick={() => {
                 setOpenPopover(false)
                 setSelectedId(null)
+                handleCommand({
+                  key: command.label,
+                  value: item.id,
+                })
               }}
             >
               {t(command.label)}
@@ -206,13 +216,15 @@ const Table: React.FC<Props> = ({ headers, data }) => {
                 trigger={'click'}
                 onOpenChange={(visible) => setOpenPopover(visible)}
               >
-                <IconButton
-                  className='border-1 border-solid border-color-resting-outline rounded-8'
-                  icon='three-dot'
-                  iconFillColor='primary-grey'
-                  iconBackgroundColor='white'
-                  onClick={() => dropdownClick(item.id)}
-                />
+                <div>
+                  <IconButton
+                    className='border-1 border-solid border-color-resting-outline rounded-8'
+                    icon='three-dot'
+                    iconFillColor='primary-grey'
+                    iconBackgroundColor='white'
+                    onClick={() => dropdownClick(item.id)}
+                  />
+                </div>
               </Popover>
             ) : null}
           </div>

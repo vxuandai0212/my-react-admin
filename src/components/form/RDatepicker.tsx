@@ -80,7 +80,7 @@ const borderBottomColor = () =>
         {t(label)}
       </div>
       <div
-        className='transition border-bottom-solid border-bottom-1 p-6-0-17-0 flex flex-row gap-2'
+        className='transition border-bottom-solid border-bottom-1 p-6-0-13-0 flex flex-row gap-2'
         style={{ borderBottomColor: borderBottomColor() }}
       >
         <DatePicker

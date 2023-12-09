@@ -1,16 +1,12 @@
 import IconButton from '@/components/button/IconButton'
-import { LineChart } from '@/components/chart/LineChart'
+import { LineChart, LineChartProps } from '@/components/chart/LineChart'
 import { BarLoading } from '@/components/loading/BarLoading'
 import SimpleTab from '@/components/tab/SimpleTab'
 import { useLoading } from '@/hooks'
 import { fetchReportVisit } from '@/service'
-import { DatePicker, DatePickerProps } from 'antd'
-import { RangePickerProps } from 'antd/es/date-picker'
 import dayjs from 'dayjs'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-
-const { RangePicker } = DatePicker
 
 const Visit: React.FC<{ className?: string }> = ({ className }) => {
   const { t } = useTranslation()
@@ -52,28 +48,28 @@ const Visit: React.FC<{ className?: string }> = ({ className }) => {
 
   const { loading, startLoading, endLoading } = useLoading(false)
 
-  const [chartData, setChartDataState] = useState<any>()
+  const [chartData, setChartDataState] = useState<LineChartProps['option']>()
   function setChartData(data: ApiReport.Visit) {
     const { x, y } = data
     const { domestic, abroad } = y
     const mapData = {
       legend: [
-        t('page.report.visitChart.legend.abroad'),
-        t('page.report.visitChart.legend.domestic'),
+        'page.report.visitChart.legend.abroad',
+        'page.report.visitChart.legend.domestic',
       ],
       x,
       y: [
         {
-          name: t('page.report.visitChart.legend.abroad'),
+          name: 'page.report.visitChart.legend.abroad',
           data: abroad,
         },
         {
-          name: t('page.report.visitChart.legend.domestic'),
+          name: 'page.report.visitChart.legend.domestic',
           data: domestic,
         },
       ],
       yAxis: {
-        name: t('page.report.visitChart.unit'),
+        name: 'page.report.visitChart.unit',
       },
     }
     setChartDataState(mapData)
@@ -98,20 +94,6 @@ const Visit: React.FC<{ className?: string }> = ({ className }) => {
     init()
   }, [])
 
-  const onChange = (
-    value: DatePickerProps['value'] | RangePickerProps['value'],
-    dateString: [string, string] | string
-  ) => {
-    console.log('Selected Time: ', value)
-    console.log('Formatted Selected Time: ', dateString)
-  }
-
-  const onOk = (
-    value: DatePickerProps['value'] | RangePickerProps['value']
-  ) => {
-    console.log('onOk: ', value)
-  }
-
   return (
     <div className={`${className}`}>
       <div className='flex justify-between items-center p-0-23-0-28 <md:gap-20 relative'>
@@ -125,24 +107,17 @@ const Visit: React.FC<{ className?: string }> = ({ className }) => {
             activeTab={'day'}
           />
           <IconButton
-            onClick={() => setShowDatePicker(true)}
             icon='date'
             className='grow-0 shrink-0'
-          />
-          <RangePicker
-            open={showDatePicker}
-            onOpenChange={(visible) => setShowDatePicker(visible)}
-            showTime={{ format: 'HH:mm' }}
-            format='YYYY-MM-DD HH:mm'
-            onChange={onChange}
-            onOk={onOk}
           />
         </div>
       </div>
       {loading ? (
-        <BarLoading className='height-320 grow' />
+        <BarLoading className='height-320 grow flex justify-center items-center w-full' />
       ) : (
-        <LineChart option={chartData} className='height-320 grow' />
+        chartData && (
+          <LineChart option={chartData} className='height-320 grow overflow-hidden' />
+        )
       )}
     </div>
   )

@@ -22,7 +22,7 @@ const AdvanceTab: React.FC<Props> = ({ tabs, active, onChooseTab }) => {
       >
         <RIcon
           icon={item.icon}
-          className={`width-22 transition ${
+          className={`height-16 transition ${
             item.key === active ? 'fill-primary' : 'fill-primary-grey'
           }`}
         />

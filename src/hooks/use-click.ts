@@ -1,9 +1,15 @@
-import { useRef } from 'react'
+import { useEffect, useState } from 'react'
 
 export default function useClick() {
-  const el = useRef<EventTarget | null>(null)
+  const [el, setEl] = useState<any>()
 
-  document.addEventListener('click', (e) => (el.current = e.target), false)
+  useEffect(() => {
+    document.addEventListener('click', (e) => setEl(e.target), false)
+
+    return () => {
+      document.removeEventListener('click', (e) => setEl(e.target), false)
+    }
+  }, [])
 
   return {
     el,

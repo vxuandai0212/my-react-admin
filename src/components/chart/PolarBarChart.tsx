@@ -1,15 +1,31 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { BaseChart, BaseChartProps } from '@/components/chart/BaseChart'
 import { COLOR } from '@/utils'
+import { useTranslation } from 'react-i18next'
 
-interface PolarBarProps extends BaseChartProps {
+export interface PolarBarProps extends BaseChartProps {
   option: {
     dimensions: string[]
     source: number[]
   }
 }
 
-export const PolarBarChart: React.FC<PolarBarProps> = ({ option, ...props }) => {
+export const PolarBarChart: React.FC<PolarBarProps> = ({
+  option,
+  ...props
+}) => {
+  const { t, i18n } = useTranslation()
+
+  useEffect(() => {
+    setPolarBarOption((prevState) => ({
+      ...prevState,
+      radiusAxis: {
+        ...prevState.radiusAxis,
+        data: option.dimensions.map((i) => t(i)),
+      },
+    }))
+  }, [i18n.language])
+
   const defaultPolarBarOption = {
     polar: {
       radius: [40, '100%'],
@@ -70,5 +86,8 @@ export const PolarBarChart: React.FC<PolarBarProps> = ({ option, ...props }) => 
       coordinateSystem: 'polar',
     },
   }
-  return <BaseChart {...props} option={{ ...defaultPolarBarOption }} />
+
+  const [polarBarOption, setPolarBarOption] = useState(defaultPolarBarOption)
+
+  return <BaseChart {...props} option={{ ...polarBarOption }} />
 }

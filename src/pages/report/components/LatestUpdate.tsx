@@ -73,8 +73,8 @@ const LatestUpdate = () => {
         <BarLoading />
       ) : (
         <div className='flex flex-col gap-9'>
-          {data?.map((item) => (
-            <ItemCard key={item.label} {...item} />
+          {data?.map((item, index) => (
+            <ItemCard key={`${item.label}-${index}`} {...item} />
           ))}
         </div>
       )}
