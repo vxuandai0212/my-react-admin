@@ -339,7 +339,7 @@ const InvoiceList = () => {
               <SimpleTab
                 onChooseTab={changeStatus}
                 tabs={tabs}
-                activeTab={tabs[0]['value']}
+                activeTab={table.filter.status}
               />
             </div>
             <div className='overflow-x-no-scrollbar'>

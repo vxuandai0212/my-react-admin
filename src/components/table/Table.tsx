@@ -90,6 +90,7 @@ const Table: React.FC<Props> = ({ headers, data }) => {
   const renderTableCell = (key: any, value: any) => {
     if (isShowField(key)) {
       if (isMatchType(key, 'tag')) {
+        console.log('tag')
         return <RTag label={value.value} type={value.type} />
       } else if (isMatchType(key, 'icon-text')) {
         return (
@@ -105,7 +106,7 @@ const Table: React.FC<Props> = ({ headers, data }) => {
                     #fff`,
               }}
             >
-              <RIcon width='18px' height='18px' fill='#5e81f4' icon='bill' />
+              <RIcon className='fill-#5e81f4' width='18px' height='18px' icon='bill' />
             </div>
             <div className='ml-20'>{getFormatText(key, value.text)}</div>
           </>
@@ -122,7 +123,7 @@ const Table: React.FC<Props> = ({ headers, data }) => {
           </>
         )
       } else {
-        ;<>{getFormatText(key, value)}</>
+        return <>{getFormatText(key, value)}</>
       }
     }
     return null
@@ -145,26 +146,6 @@ const Table: React.FC<Props> = ({ headers, data }) => {
   const [openPopover, setOpenPopover] = useState<boolean>(false)
 
   const renderTableRow = (item: any) => {
-    const content = item.commands.map((command: any) => {
-      const color =
-        command.type === 'warning'
-          ? 'warning'
-          : command.type === 'danger'
-          ? 'danger'
-          : 'primary-dark'
-      return (
-        <div
-          style={{ color: `var(--${color}` }}
-          className='cursor-pointer p-12-20-13-17 font-size-14 font-700 hover:color-primary hover:background-color-background-extra-light transition'
-          onClick={() => {
-            setOpenPopover(false)
-            setSelectedId(null)
-          }}
-        >
-          {t(command.label)}
-        </div>
-      )
-    })
     const data: any = []
     Object.keys(item).forEach((key) => {
       const value = item[key]
@@ -181,26 +162,6 @@ const Table: React.FC<Props> = ({ headers, data }) => {
           >
             {renderTableCell(key, value)}
           </div>
-          {hasCommand() ? (
-            <div className='width-80 cursor-pointer'>
-              {isRenderCommandDropdown(item) ? (
-                <Popover
-                  open={openPopover && selectedId === item.id}
-                  content={content}
-                  trigger={'click'}
-                  onOpenChange={(visible) => setOpenPopover(visible)}
-                >
-                  <IconButton
-                    className='border-1 border-solid border-color-resting-outline rounded-8'
-                    icon='three-dot'
-                    icon-fill-color='primary-grey'
-                    icon-background-color='white'
-                    onClick={() => dropdownClick(item.id)}
-                  />
-                </Popover>
-              ) : null}
-            </div>
-          ) : null}
         </>
       )
       data.push(rowData)
@@ -208,9 +169,54 @@ const Table: React.FC<Props> = ({ headers, data }) => {
     return data
   }
   const renderTableBody = data.map((item) => {
+    const content = item.commands
+      ? item.commands.map((command: any) => {
+          const color =
+            command.type === 'warning'
+              ? 'warning'
+              : command.type === 'danger'
+              ? 'danger'
+              : 'primary-dark'
+          return (
+            <div
+              style={{ color: `var(--${color}` }}
+              className='cursor-pointer p-12-20-13-17 font-size-14 font-700 hover:color-primary hover:background-color-background-extra-light transition'
+              onClick={() => {
+                setOpenPopover(false)
+                setSelectedId(null)
+              }}
+            >
+              {t(command.label)}
+            </div>
+          )
+        })
+      : null
     return (
-      <div className='border-1 border-solid border-color-resting-outline rounded-12 flex basis-88px grow-0 shrink-0 items-center m-0-25-0-25 p-0-0-0-20 hover:background-color-background-extra-light transition'>
+      <div
+        key={item.id}
+        className='border-1 border-solid border-color-resting-outline rounded-12 flex basis-88px grow-0 shrink-0 items-center m-0-25-0-25 p-0-0-0-20 hover:background-color-background-extra-light transition'
+      >
         {renderTableRow(item)}
+        {hasCommand() ? (
+          <div className='width-80 cursor-pointer'>
+            {isRenderCommandDropdown(item) ? (
+              <Popover
+                open={openPopover && selectedId === item.id}
+                content={content}
+                trigger={'click'}
+                onOpenChange={(visible) => setOpenPopover(visible)}
+              >
+                <IconButton
+                  className='border-1 border-solid border-color-resting-outline rounded-8'
+                  icon='three-dot'
+                  iconFillColor='primary-grey'
+                  iconBackgroundColor='white'
+                  onClick={() => dropdownClick(item.id)}
+                />
+              </Popover>
+            ) : null}
+          </div>
+        ) : null}
       </div>
     )
   })
@@ -218,10 +224,10 @@ const Table: React.FC<Props> = ({ headers, data }) => {
     <div className='flex flex-col gap-22 grow shrink'>
       <div className='flex basis-48px grow-0 shrink-0 overflow-hidden p-14-25-0-45 background-color-FBFBFD cursor-default'>
         {renderHeader}
-        <div v-if='hasCommand' className='width-80'></div>
+        {hasCommand() ? <div className='width-80'></div> : ''}
       </div>
       <div className='flex flex-col h-full overflow-y-no-scrollbar gap-7'>
-        {renderTableBody}
+        {data && renderTableBody}
       </div>
     </div>
   )

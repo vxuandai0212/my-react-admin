@@ -51,10 +51,9 @@ const RCheckbox: React.FC<Props> = ({
       >
         <RIcon
           icon='tick'
-          className={`${disabled ? 'opacity70' : ''}`}
+          className={`${disabled ? 'opacity70' : ''} ${isActive(item.value) ? 'fill-white' : 'fill-#EEE'}`}
           width='10.728px'
           height='8px'
-          fill={`${isActive(item.value) ? 'white' : '#EEE'}`}
         />
       </div>
       <div
@@ -71,7 +70,6 @@ const RCheckbox: React.FC<Props> = ({
     <div>
       {label ? (
         <div
-          v-if='label'
           className='mb-17 color-primary-grey font-size-14 font-400 line-height-21 cursor-default'
         >
           {label}

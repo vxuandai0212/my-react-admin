@@ -1,4 +1,4 @@
-const product: AuthRoute.Route = {
+const product = {
   name: 'product',
   path: '/product',
   component: 'basic',
@@ -31,7 +31,11 @@ const product: AuthRoute.Route = {
   meta: {
     title: 'Products',
     i18nTitle: 'routes.product._value',
-    icon: 'product',
+    icon: {
+      name: 'product',
+      width: 16,
+      height: 18
+    },
     order: 8,
   },
 }

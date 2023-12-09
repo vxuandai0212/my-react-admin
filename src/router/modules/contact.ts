@@ -1,4 +1,4 @@
-const contact: AuthRoute.Route = {
+const contact = {
   name: 'contact',
   path: '/contact',
   component: 'basic',
@@ -31,7 +31,11 @@ const contact: AuthRoute.Route = {
   meta: {
     title: 'Contacts',
     i18nTitle: 'routes.contact._value',
-    icon: 'contact',
+    icon: {
+      name: 'contact',
+      width: 18,
+      height: 19
+    },
     order: 6,
   },
 }

@@ -28,8 +28,7 @@ const CategoryCard: React.FC<Card.CategoryCard> = ({
         style={{ backgroundColor: `var(--${iconBackgroundColor})` }}
       >
         <RIcon
-          className='width-20'
-          fill={`var(--${iconFillColor})`}
+          className={`width-20 fill-${iconFillColor}`}
           icon={icon}
         />
       </div>

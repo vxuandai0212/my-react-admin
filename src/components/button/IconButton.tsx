@@ -13,7 +13,7 @@ const IconButton: React.FC<Props> = ({
   icon,
   iconFillColor = 'primary-grey',
   iconBackgroundColor = 'background-3',
-  onClick
+  onClick,
 }) => {
   return (
     <div
@@ -21,11 +21,7 @@ const IconButton: React.FC<Props> = ({
       className={`flex justify-center items-center width-36 height-36 rounded-6 cursor-pointer ${className}`}
       onClick={onClick}
     >
-      <RIcon
-        fill={`var(--${iconFillColor})`}
-        className='width-16 height-16'
-        icon={icon}
-      />
+      <RIcon className={`width-16 height-16 fill-${iconFillColor}`} icon={icon} />
     </div>
   )
 }

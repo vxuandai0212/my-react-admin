@@ -1,4 +1,4 @@
-const task: AuthRoute.Route = {
+const task = {
   name: 'task',
   path: '/task',
   component: 'basic',
@@ -31,7 +31,11 @@ const task: AuthRoute.Route = {
   meta: {
     title: 'Tasks',
     i18nTitle: 'routes.task._value',
-    icon: 'task',
+    icon: {
+      name: 'task',
+      width: 16,
+      height: 19
+    },
     order: 3,
   },
 }

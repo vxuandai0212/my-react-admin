@@ -63,7 +63,7 @@ const RInput: React.FC<Props> = ({
     error ? 'var(--danger)' : inputFocus ? 'var(--primary)' : 'var(--outline)'
 
   const color = () =>
-    value && value.trim() !== '' ? 'var(--primary-dark)' : 'var(--primary-grey)'
+    value && value.trim() !== '' ? 'primary-dark' : 'primary-grey'
 
   return (
     <div className={`${className}`}>
@@ -96,7 +96,7 @@ const RInput: React.FC<Props> = ({
               disabled ? 'opacity70' : ''
             }`}
           >
-            <RIcon icon={icon} fill={color()} height='16px' />
+            <RIcon className={`fill-${color()} transition`} icon={icon} height='16px' />
           </div>
         ) : null}
       </div>

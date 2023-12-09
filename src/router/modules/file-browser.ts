@@ -1,4 +1,4 @@
-const fileBrowser: AuthRoute.Route = {
+const fileBrowser = {
   name: 'file-browser',
   path: '/file-browser',
   component: 'basic',
@@ -31,7 +31,11 @@ const fileBrowser: AuthRoute.Route = {
   meta: {
     title: 'File Browser',
     i18nTitle: 'routes.file-browser._value',
-    icon: 'file',
+    icon: {
+      name: 'file',
+      width: 16,
+      height: 20
+    },
     order: 10,
   },
 }

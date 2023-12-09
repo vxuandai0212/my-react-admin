@@ -40,10 +40,11 @@ const NToggle: React.FC<Props> = ({
           <RIcon
             className={`ease-linear duration-150 delay-0 absolute top-3 ${
               value ? 'left-20' : 'left-4'
-            } ${disabled ? 'opacity70' : ''}`}
+            } ${disabled ? 'opacity70' : ''}
+            ${value ? 'fill-white' : 'fill-#98A9BC'}
+            `}
             width='16px'
             height='16px'
-            fill={value ? 'white' : '#98A9BC'}
             icon='oval'
           />
         </div>

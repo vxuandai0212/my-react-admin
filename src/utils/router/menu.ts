@@ -42,7 +42,9 @@ export function transformAuthRouteToMenu(routes: any) {
         routePath: path,
         i18nTitle: meta.i18nTitle,
       },
-      icon: meta.icon,
+      icon: meta?.icon?.name,
+      iconWidth: meta?.icon?.width,
+      iconHeight: meta?.icon?.height,
       children: menuChildren,
     })
 
@@ -58,13 +60,19 @@ function hideInMenu(route: any) {
   return Boolean(route.meta.hide)
 }
 
-function addPartialProps(config: { menu: any; icon?: string; children?: any }) {
+function addPartialProps(config: {
+  menu: any
+  icon?: string
+  iconWidth?: number
+  iconHeight?: number
+  children?: any
+}) {
   const item = { ...config.menu }
 
-  const { icon, children } = config
+  const { icon, iconWidth, iconHeight, children } = config
 
   if (icon) {
-    Object.assign(item, { icon })
+    Object.assign(item, { icon, iconWidth, iconHeight })
   }
 
   if (children) {

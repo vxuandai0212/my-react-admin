@@ -1,4 +1,4 @@
-const dashboard: AuthRoute.Route = {
+const dashboard = {
   name: 'dashboard',
   path: '/dashboard',
   component: 'basic',
@@ -19,7 +19,11 @@ const dashboard: AuthRoute.Route = {
   meta: {
     title: 'Dashboard',
     i18nTitle: 'routes.dashboard._value',
-    icon: 'dashboard',
+    icon: {
+      name: 'dashboard',
+      width: 18,
+      height: 15
+    },
     order: 1,
   },
 }

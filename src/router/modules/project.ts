@@ -1,4 +1,4 @@
-const project: AuthRoute.Route = {
+const project = {
   name: 'project',
   path: '/project',
   component: 'basic',
@@ -31,7 +31,11 @@ const project: AuthRoute.Route = {
   meta: {
     title: 'Projects',
     i18nTitle: 'routes.project._value',
-    icon: 'project',
+    icon: {
+      name: 'project',
+      width: 20,
+      height: 16
+    },
     order: 2,
   },
 }

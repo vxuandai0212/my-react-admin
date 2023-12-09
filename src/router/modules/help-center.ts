@@ -1,4 +1,4 @@
-const helpCenter: AuthRoute.Route = {
+const helpCenter = {
   name: 'help-center',
   path: '/help-center',
   component: 'basic',
@@ -31,7 +31,11 @@ const helpCenter: AuthRoute.Route = {
   meta: {
     title: 'Help Center',
     i18nTitle: 'routes.help-center._value',
-    icon: 'help',
+    icon: {
+      name: 'help',
+      width: 12,
+      height: 17
+    },
     order: 13,
   },
 }

@@ -130,7 +130,7 @@ const RSelect: React.FC<Props> = ({
                 disabled ? 'opacity70' : ''
               }`}
             >
-              <RIcon icon={icon} fill={color()} />
+              <RIcon icon={icon} className={`fill-${color()}`} />
             </div>
           ) : null}
         </div>

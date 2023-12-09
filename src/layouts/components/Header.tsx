@@ -26,6 +26,7 @@ const Header: React.FC<Props> = ({ routeName, className }) => {
       <div className='flex items-center'>
         {!isMobile ? (
           <IconButton
+            iconFillColor='primary-grey'
             icon='hamburger'
             onClick={() => {dispatch(toggleSiderCollapse()); console.log('click hamburger')}}
           />
@@ -38,7 +39,8 @@ const Header: React.FC<Props> = ({ routeName, className }) => {
       </div>
       <div className='flex items-center justify-end gap-6'>
         <SimpleSearch />
-        {hasPermission(['admin', 'super']) ? <AddButton /> : null}
+        {/* {hasPermission(['admin', 'super']) ? <AddButton /> : null} */}
+        <AddButton />
         <LangButton />
       </div>
     </div>

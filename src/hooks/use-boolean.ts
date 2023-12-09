@@ -1,11 +1,8 @@
-import { useRef } from 'react'
+import { useState } from 'react'
 
 export function useBoolean(initValue = false) {
-  const bool = useRef<boolean>(initValue)
-
-  function setBool(value: boolean) {
-    bool.current = value
-  }
+  const [bool, setBool] = useState<boolean>(initValue)
+  
   function setTrue() {
     setBool(true)
   }
@@ -13,7 +10,7 @@ export function useBoolean(initValue = false) {
     setBool(false)
   }
   function toggle() {
-    setBool(!bool.current)
+    setBool(!bool)
   }
 
   return {

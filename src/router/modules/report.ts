@@ -1,4 +1,4 @@
-const report: AuthRoute.Route = {
+const report = {
   name: 'report',
   path: '/report',
   component: 'basic',
@@ -19,7 +19,11 @@ const report: AuthRoute.Route = {
   meta: {
     title: 'Reports',
     i18nTitle: 'routes.report._value',
-    icon: 'report',
+    icon: {
+      name: 'report',
+      width: 18,
+      height: 17
+    },
     order: 12,
   },
 }

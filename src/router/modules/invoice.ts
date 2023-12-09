@@ -1,4 +1,4 @@
-const invoice: AuthRoute.Route = {
+const invoice = {
   name: 'invoice',
   path: '/invoice',
   component: 'basic',
@@ -31,7 +31,11 @@ const invoice: AuthRoute.Route = {
   meta: {
     title: 'Invoices',
     i18nTitle: 'routes.invoice._value',
-    icon: 'invoice',
+    icon: {
+      name: 'invoice',
+      width: 14,
+      height: 19
+    },
     order: 9,
   },
 }

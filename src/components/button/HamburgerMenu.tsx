@@ -96,8 +96,7 @@ const HamburgerMenu: React.FC = () => {
           }}
         >
           <RIcon
-            className='width-16 height-16'
-            fill={`${openPopover ? 'var(--white)' : 'var(--primary-grey)'}`}
+            className={`width-16 height-16 ${openPopover ? 'fill-white' : 'fill-primary-grey'}`}
             icon='hamburger'
           />
         </div>

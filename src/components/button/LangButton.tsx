@@ -93,8 +93,9 @@ const LangButton: React.FC<LangButtonProps> = ({
           }}
         >
           <RIcon
-            className='width-16 height-16'
-            fill={`${openPopover ? 'var(--white)' : 'var(--primary-grey)'}`}
+            className={`width-16 height-16 fill-${
+              openPopover ? 'white' : 'primary-grey'
+            }`}
             icon='language'
           />
         </div>

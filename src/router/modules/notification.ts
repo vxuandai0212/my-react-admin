@@ -1,4 +1,4 @@
-const notification: AuthRoute.Route = {
+const notification = {
   name: 'notification',
   path: '/notification',
   component: 'basic',
@@ -31,7 +31,11 @@ const notification: AuthRoute.Route = {
   meta: {
     title: 'Notifications',
     i18nTitle: 'routes.notification._value',
-    icon: 'notification',
+    icon: {
+      name: 'notification',
+      width: 18,
+      height: 19
+    },
     order: 11,
   },
 }

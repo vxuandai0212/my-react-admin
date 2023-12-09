@@ -1,4 +1,4 @@
-const kanban: AuthRoute.Route = {
+const kanban = {
   name: 'kanban',
   path: '/kanban',
   component: 'basic',
@@ -31,7 +31,11 @@ const kanban: AuthRoute.Route = {
   meta: {
     title: 'Kanban',
     i18nTitle: 'routes.kanban._value',
-    icon: 'kanban',
+    icon: {
+      name: 'kanban',
+      width: 20,
+      height: 16
+    },
     order: 4,
   },
 }

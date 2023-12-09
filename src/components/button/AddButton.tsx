@@ -174,8 +174,7 @@ const AddButton: React.FC = () => {
         }}
       >
         <RIcon
-          className='width-16 height-16'
-          fill={`${openPopover ? 'var(--white)' : 'var(--primary-grey)'}`}
+          className={`width-16 height-16' fill-${openPopover ? 'white' : 'primary-grey'}`}
           icon='add'
         />
       </div>

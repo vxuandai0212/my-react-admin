@@ -62,14 +62,14 @@ const BasicLayout: React.FC = () => {
       style={{
         maxHeight: '265px',
         overflowY: 'auto',
-        width: '285px',
+        width: '140px',
         overflowX: 'hidden',
       }}
     >
       <div
         style={{ color: 'var(--primary-dark)' }}
         className={
-          'cursor-pointer p-12-20-13-17 font-size-14 font-700 hover:color-primary hover:background-color-background-extra-light transition'
+          'cursor-pointer p-5-20-7-17 font-size-14 font-700 hover:color-primary hover:background-color-background-extra-light transition'
         }
         onClick={() => {
           setOpenPopover(false)
@@ -88,28 +88,32 @@ const BasicLayout: React.FC = () => {
         className='p-8-0-8-19 group flex jusity-between cursor-pointer'
       >
         <div
-          className={`group-hover:background-color-info flex items-center transition flex-grow mr-19 rounded-4 relative ${
+          className={`group-hover:background-color-info flex items-center transition mr-19 rounded-4 relative ${
             item.key === current
               ? 'background-color-primary-resting'
               : 'background-color-white'
-          } ${collapsed ? 'gap-0' : 'gap-15'}`}
+          } ${collapsed ? 'gap-0' : 'gap-15 grow'}`}
           onClick={() => navigate(item.key)}
         >
           {item.label === haveNotification ? (
             <div className='background-color-danger absolute width-12 height-12 left-26 top-11 rounded-50 border-color-white border-2'></div>
           ) : null}
-          <RIcon
-            className={`group-hover:fill-white width-48 text-center transition ${
-              item.key === current ? 'fill-primary' : 'fill-primary-grey'
-            }`}
-            icon={item.icon}
-          />
+          <div className='width-48 flex justify-center'>
+            <RIcon
+              width={`${item.iconWidth}px`}
+              height={`${item.iconHeight}px`}
+              className={`group-hover:fill-white transition ${
+                item.key === current ? 'fill-primary' : 'fill-primary-grey'
+              }`}
+              icon={item.icon}
+            />
+          </div>
           <span
             className={`group-hover:color-white font-size-14 font-700 line-height-21 overflow-hidden truncate transition ${
               item.key === current ? 'color-primary-dark' : 'color-primary-grey'
             } ${collapsed ? 'width-0' : ''}`}
           >
-            {t(item.label)}
+            {t(item.i18nTitle)}
           </span>
         </div>
         <div
@@ -127,7 +131,7 @@ const BasicLayout: React.FC = () => {
     <div className='background-color-background-light flex h-screen overflow-hidden'>
       {!isMobile ? (
         <div
-          className={`pb-10 background-color-white border-right-1 border-right-color-outline border-right-solid transition flex flex-col grow-0 shrink-0 ${
+          className={`pb-10 background-color-white border-right-1 border-right-color-outline border-right-solid transition flex flex-col grow-0 shrink-0 overflow-hidden ${
             collapsed ? 'basis-89px' : 'basis-242px'
           }`}
         >
@@ -160,12 +164,13 @@ const BasicLayout: React.FC = () => {
                   alt='Avatar'
                 />
                 <div className='absolute width-12 height-12 left-51 bottom-14 background-color-success rounded-50 border-color-white border-2'></div>
-                <span
-                  v-if='!collapsed'
-                  className='font-size-14 font-700 line-height-21 color-primary-grey truncate transition'
-                >
-                  John Doe
-                </span>
+                {!collapsed ? (
+                  <span className='font-size-14 font-700 line-height-21 color-primary-grey truncate transition'>
+                    John Doe
+                  </span>
+                ) : (
+                  ''
+                )}
               </div>
             </Popover>
           </div>

@@ -96,8 +96,7 @@ const SimpleSearch: React.FC = () => {
           }}
         >
           <RIcon
-            className='width-16 height-16'
-            fill={showInput ? 'fill-primary' : 'fill-primary-grey'}
+            className={`width-16 height-16 ${showInput ? 'fill-primary' : 'fill-primary-grey'}`}
             icon='search'
           />
         </div>

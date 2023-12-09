@@ -1,4 +1,4 @@
-const calendar: AuthRoute.Route = {
+const calendar = {
   name: 'calendar',
   path: '/calendar',
   component: 'basic',
@@ -23,7 +23,11 @@ const calendar: AuthRoute.Route = {
     i18nHeaderTitle: 'routes.calendar.headerTitle',
     requiresAuth: true,
     keepAlive: true,
-    icon: 'calendar',
+    icon: {
+      name: 'calendar',
+      width: 16,
+      height: 17
+    },
     order: 5,
   },
 }

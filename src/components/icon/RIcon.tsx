@@ -1,4 +1,54 @@
-import { SvgAdd, SvgArrow, SvgAttach, SvgBill, SvgBusiness, SvgCalendar, SvgCaretDown, SvgCart, SvgCompany, SvgContact, SvgCreate, SvgDashboard, SvgDate, SvgDelete, SvgDescription, SvgDiamond, SvgDropbox, SvgEmail, SvgEmoticon, SvgFacebook, SvgFile, SvgFrom, SvgFullname, SvgGoogle, SvgHamburger, SvgHelp, SvgHour, SvgInvoice, SvgKanban, SvgKeyboard, SvgLanguage, SvgLaptop, SvgMessage, SvgMoney, SvgNotification, SvgOval, SvgPassword, SvgPhone, SvgProduct, SvgProject, SvgRate, SvgReport, SvgSave, SvgSearch, SvgTask, SvgThreeDot, SvgTick, SvgTwitter, SvgUpload } from '@/components/svg'
+import {
+  SvgAdd,
+  SvgArrow,
+  SvgAttach,
+  SvgBill,
+  SvgBusiness,
+  SvgCalendar,
+  SvgCaretDown,
+  SvgCart,
+  SvgCompany,
+  SvgContact,
+  SvgCreate,
+  SvgDashboard,
+  SvgDate,
+  SvgDelete,
+  SvgDescription,
+  SvgDiamond,
+  SvgDropbox,
+  SvgEmail,
+  SvgEmoticon,
+  SvgFacebook,
+  SvgFile,
+  SvgFrom,
+  SvgFullname,
+  SvgGoogle,
+  SvgHamburger,
+  SvgHelp,
+  SvgHour,
+  SvgInvoice,
+  SvgKanban,
+  SvgKeyboard,
+  SvgLanguage,
+  SvgLaptop,
+  SvgMessage,
+  SvgMoney,
+  SvgNotification,
+  SvgOval,
+  SvgPassword,
+  SvgPhone,
+  SvgProduct,
+  SvgProject,
+  SvgRate,
+  SvgReport,
+  SvgSave,
+  SvgSearch,
+  SvgTask,
+  SvgThreeDot,
+  SvgTick,
+  SvgTwitter,
+  SvgUpload,
+} from '@/components/svg'
 import { SVGProps } from 'react'
 
 const ICON: {
@@ -52,7 +102,7 @@ const ICON: {
   'three-dot': SvgThreeDot,
   tick: SvgTick,
   twitter: SvgTwitter,
-  upload: SvgUpload
+  upload: SvgUpload,
 }
 
 const RIcon: React.FC<{
@@ -60,12 +110,16 @@ const RIcon: React.FC<{
   className?: string
   width?: string
   height?: string
-  fill?: string
   onClick?: () => void
-}> = ({ icon = 'add', className, width, height, fill, onClick }) => {
+}> = ({ icon = 'add', className, width, height, onClick }) => {
   const Icon = ICON[icon]
   return (
-    <Icon onClick={onClick} className={className} width={width} height={height} fill={fill} />
+    <Icon
+      onClick={onClick}
+      className={`transition ${className}`}
+      width={width}
+      height={height}
+    />
   )
 }
 

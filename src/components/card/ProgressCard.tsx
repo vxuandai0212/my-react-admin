@@ -58,8 +58,7 @@ const ProgressCard: React.FC<Card.ProgressCard> = ({
             icon='arrow'
             width='12px'
             height='12px'
-            fill={trendColor()}
-            className={`${trend === 'down' ? 'rotate-x-180' : ''}`}
+            className={`${trend === 'down' ? 'rotate-x-180' : ''} fill-${trendColor()}`}
           />
         </div>
       </div>
@@ -68,6 +67,8 @@ const ProgressCard: React.FC<Card.ProgressCard> = ({
         strokeColor={COLOR[progressColor]}
         trailColor='#F6F6F6'
         percent={percent}
+        showInfo={false}
+        size={'small'}
       />
     </div>
   )

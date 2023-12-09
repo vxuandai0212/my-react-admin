@@ -1,4 +1,4 @@
-const message: AuthRoute.Route = {
+const message = {
   name: 'message',
   path: '/message',
   component: 'basic',
@@ -31,7 +31,11 @@ const message: AuthRoute.Route = {
   meta: {
     title: 'Messages',
     i18nTitle: 'routes.message._value',
-    icon: 'message',
+    icon: {
+      name: 'message',
+      width: 20,
+      height: 18
+    },
     order: 7,
   },
 }

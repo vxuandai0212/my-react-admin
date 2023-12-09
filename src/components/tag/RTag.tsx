@@ -2,11 +2,11 @@ import { useTranslation } from 'react-i18next'
 
 interface Props {
   label: I18nType.I18nKey
-  type?: 'primary' | 'success' | 'warning' | 'danger' | 'info' | 'default'
+  type: 'primary' | 'success' | 'warning' | 'danger' | 'info' | 'default'
   className?: string
 }
 
-const RTag: React.FC<Props> = ({ label, type, className }) => {
+const RTag: React.FC<Props> = ({ label, type, className = null }) => {
   const { t } = useTranslation()
   const BACKGROUND_COLOR = {
     primary: 'primary-resting',
@@ -26,15 +26,15 @@ const RTag: React.FC<Props> = ({ label, type, className }) => {
     default: 'default',
   }
 
-  const backgroundColor = () => BACKGROUND_COLOR[type!]
+  const backgroundColor = () => BACKGROUND_COLOR[type]
 
-  const textColor = () => TEXT_COLOR[type!]
+  const textColor = () => TEXT_COLOR[type]
   return (
     <div
       className={`width-145 height-36 rounded-8 flex justify-center items-center font-size-14 font-700 cursor-default ${className}`}
       style={{
-        backgroundColor: `var(--${backgroundColor})`,
-        color: `var(--${textColor})`,
+        backgroundColor: `var(--${backgroundColor()})`,
+        color: `var(--${textColor()})`,
       }}
     >
       {t(label)}
