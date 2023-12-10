@@ -80,3 +80,11 @@ function addPartialProps(config: {
   }
   return item
 }
+
+export function getLeavesRoutes(routes: Record<AvailableRoute, RouteModel[]>) {
+  const data: { path: string }[] = []
+  for (const [, value] of Object.entries(routes)) {
+    value.map((item) => data.push({ path: item.path }))
+  }
+  return data
+}

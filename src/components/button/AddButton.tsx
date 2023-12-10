@@ -17,7 +17,7 @@ const AddButton: React.FC = () => {
         }
         onClick={() => {
           setOpenPopover(false)
-          navigate('/invoice/new')
+          navigate('/project/new')
         }}
       >
         <div className={'flex gap-15 items-center'}>
@@ -41,7 +41,7 @@ const AddButton: React.FC = () => {
         }
         onClick={() => {
           setOpenPopover(false)
-          navigate('/invoice/new')
+          navigate('/task/new')
         }}
       >
         <div className={'flex gap-15 items-center'}>
@@ -65,7 +65,7 @@ const AddButton: React.FC = () => {
         }
         onClick={() => {
           setOpenPopover(false)
-          navigate('/invoice/new')
+          navigate('/contact/new')
         }}
       >
         <div className={'flex gap-15 items-center'}>
@@ -89,7 +89,7 @@ const AddButton: React.FC = () => {
         }
         onClick={() => {
           setOpenPopover(false)
-          navigate('/invoice/new')
+          navigate('/event/new')
         }}
       >
         <div className={'flex gap-15 items-center'}>
@@ -113,7 +113,7 @@ const AddButton: React.FC = () => {
         }
         onClick={() => {
           setOpenPopover(false)
-          navigate('/invoice/new')
+          navigate('/product/new')
         }}
       >
         <div className={'flex gap-15 items-center'}>

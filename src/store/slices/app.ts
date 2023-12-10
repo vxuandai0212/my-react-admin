@@ -16,7 +16,6 @@ export const appSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(toggleSiderCollapse, (state) => {
-      console.log('siderCollapse')
       state.siderCollapse = !state.siderCollapse
     })
   },

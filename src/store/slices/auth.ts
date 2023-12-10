@@ -9,6 +9,8 @@ import { fetchLogin, fetchUserInfo } from '@/service'
 import { localStg } from '@/utils'
 import { useNotification } from '@/hooks/use-notification'
 import { useTranslation } from 'react-i18next'
+import { redirect } from 'react-router-dom'
+import { getLeavesRoutes } from '@/utils/router/menu'
 
 export interface AuthState {
   userInfo: Auth.UserInfo
@@ -60,6 +62,7 @@ export const handleActionAfterLogin = createAsyncThunk(
 
     const { data } = await fetchUserInfo()
     if (data) {
+      data.authorizedLeavesRoutes = getLeavesRoutes(data.authorizedRoutes).map(item => item.path)
       localStg.set('userInfo', data)
       dispatch(setUserInfo(data))
       dispatch(setToken(token))
@@ -73,6 +76,8 @@ export const handleActionAfterLogin = createAsyncThunk(
         }),
         duration: 3000,
       })
+
+      redirect(data.defaultRoute)
 
       return
     }
@@ -90,6 +95,7 @@ export const login = createAsyncThunk(
       dispatch(handleActionAfterLogin(data))
     }
     dispatch(setLoginLoading(false))
+    return data
   }
 )
 

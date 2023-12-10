@@ -1,27 +1,54 @@
-import dayjs from 'dayjs'
+import dayjs, { Dayjs } from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
-import { useTranslation } from 'react-i18next'
+import LocalizedFormat from 'dayjs/plugin/localizedFormat'
+import localeData from 'dayjs/plugin/localeData'
+import isBetween from 'dayjs/plugin/isBetween'
+import 'dayjs/locale/en'
+import 'dayjs/locale/fr'
+import 'dayjs/locale/es'
+import 'dayjs/locale/vi'
 
 dayjs.extend(relativeTime)
+dayjs.extend(LocalizedFormat)
+dayjs.extend(localeData)
+dayjs.extend(isBetween)
 
-export function useDatetime() {
-  const { i18n } = useTranslation()
+export type AppDate = Dayjs
 
-  function datetime(value: any) {
-    return dayjs(value).locale(i18n.language)
+export class Dates {
+  static setLocale(locale: I18nType.LangType): void {
+    dayjs.locale(locale)
   }
 
-  function now() {
-    return dayjs().locale(i18n.language)
+  static getToday(): AppDate {
+    return dayjs()
   }
 
-  function timeFromNow(value: any) {
-    return dayjs(value).locale(i18n.language).fromNow(true)
+  static getClearDate(): AppDate {
+    return this.getToday().hour(0).minute(0).second(0).millisecond(0)
   }
 
-  return {
-    now,
-    datetime,
-    timeFromNow,
+  static getMonths(): string[] {
+    return dayjs.months()
+  }
+
+  static getDays(): string[] {
+    return dayjs.weekdaysShort()
+  }
+
+  static getDate(date: number | string): AppDate {
+    return dayjs(date)
+  }
+
+  static format(date: AppDate | string | number, query: string): string {
+    if (typeof date === 'string' || typeof date === 'number') {
+      return dayjs(date).format(query)
+    } else {
+      return date.format(query)
+    }
+  }
+
+  static timeFromNow(value: any) {
+    return dayjs(value).fromNow(true)
   }
 }

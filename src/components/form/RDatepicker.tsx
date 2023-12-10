@@ -59,7 +59,6 @@ const RDatepicker: React.FC<Props> = ({
 
 
   const onChange: DatePickerProps['onChange'] = (date, dateString) => {
-    console.log(date, dateString)
     setDatePicker(date)
   }
 

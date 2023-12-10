@@ -1,6 +1,6 @@
 import RIcon from '@/components/icon/RIcon'
 import RTag from '@/components/tag/RTag'
-import { useDatetime } from '@/hooks'
+import { Dates } from '@/hooks'
 import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import EmojiPicker from 'emoji-picker-react'
@@ -10,9 +10,8 @@ import useClick from '@/hooks/use-click'
 
 const InvoiceDetail: React.FC = () => {
   const { t } = useTranslation()
-  const { datetime } = useDatetime()
-  const sampleDate1 = datetime(1683533878000).format('DD MMM YYYY')
-  const sampleDate2 = datetime(1694161078000).format('DD MMM YYYY')
+  const sampleDate1 = Dates.format(1683533878000, 'DD MMM YYYY')
+  const sampleDate2 = Dates.format(1694161078000, 'DD MMM YYYY')
 
   const chatContainerRef: any = useRef(null)
   const commentInputRef: any = useRef(null)
@@ -484,7 +483,11 @@ const InvoiceDetail: React.FC = () => {
                   className='fill-primary-grey'
                 />
               </div>
-              <PrimaryButton className='p-9-33-8-34' label='button.send' />
+              <PrimaryButton
+                className='p-9-33-8-34'
+                label='button.send'
+                onClick={() => {}}
+              />
             </div>
           </div>
         </div>

@@ -1,4 +1,4 @@
-import { useDatetime, useNumber } from '@/hooks'
+import { useNumber, Dates } from '@/hooks'
 import { useTranslation } from 'react-i18next'
 import RIcon from '../icon/RIcon'
 
@@ -10,14 +10,13 @@ const ItemCard: React.FC<Card.ItemCard> = ({
   icon,
 }) => {
   const { t } = useTranslation()
-  const { timeFromNow } = useDatetime()
   const { moneyFormat, numberFormat } = useNumber()
 
   const formatValue = () => {
     if (valueType === 'currency') {
       return `+${moneyFormat('currency', 'USD', value)}`
     } else if (valueType === 'datetime') {
-      return timeFromNow(value)
+      return Dates.timeFromNow(value)
     } else {
       return numberFormat(value)
     }

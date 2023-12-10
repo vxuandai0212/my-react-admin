@@ -1,9 +1,9 @@
 import { Popover } from 'antd'
 import { TooltipPlacement } from 'antd/es/tooltip'
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 import RIcon from '../icon/RIcon'
 import { useTranslation } from 'react-i18next'
-import { localStg } from '@/utils'
+import { useLanguage } from '@/hooks/use-language'
 
 interface LangButtonProps {
   placement?: TooltipPlacement
@@ -16,13 +16,11 @@ const LangButton: React.FC<LangButtonProps> = ({
 }) => {
   const { t } = useTranslation()
   const [openPopover, setOpenPopover] = useState<boolean>(false)
-  const { i18n } = useTranslation()
-  const language = useRef<I18nType.LangType>(localStg.get('lang') || 'vi')
+
+  const { language, setLanguage } = useLanguage()
 
   const handleSelect = (key: I18nType.LangType) => {
-    i18n.changeLanguage(key)
-    language.current = key
-    localStg.set('lang', key as I18nType.LangType)
+    setLanguage(key)
   }
 
   const content = (
@@ -46,7 +44,7 @@ const LangButton: React.FC<LangButtonProps> = ({
         <div className={'flex gap-15 items-center'}>
           <div
             className={`group-hover:color-primary ${
-              language.current === 'vi' ? 'color-primary' : 'color-primary-dark'
+              language === 'vi' ? 'color-primary' : 'color-primary-dark'
             } font-size-14 font-700 line-height-21 transition`}
           >
             Tiếng Việt
@@ -65,7 +63,7 @@ const LangButton: React.FC<LangButtonProps> = ({
         <div className={'flex gap-15 items-center'}>
           <div
             className={`group-hover:color-primary ${
-              language.current === 'en' ? 'color-primary' : 'color-primary-dark'
+              language === 'en' ? 'color-primary' : 'color-primary-dark'
             } font-size-14 font-700 line-height-21 transition`}
           >
             English

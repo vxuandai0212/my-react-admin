@@ -1,13 +1,12 @@
 import EventCard from '@/components/card/EventCard'
 import { BarLoading } from '@/components/loading/BarLoading'
-import { useDatetime, useLoading } from '@/hooks'
+import { Dates, useLoading } from '@/hooks'
 import { fetchUpcomingEvent } from '@/service'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 const UpcomingEvent = () => {
   const { t } = useTranslation()
-  const { now, datetime } = useDatetime()
 
   const { loading, startLoading, endLoading } = useLoading(false)
 
@@ -15,7 +14,7 @@ const UpcomingEvent = () => {
 
   function setData(value: ApiReport.UpcomingEvent[]) {
     const mapData = value.map(function (i): Card.EventCard {
-      const diff = Math.ceil(datetime(now()).diff(i.startAt, 'minutes', true))
+      const diff = Math.ceil(Dates.getToday().diff(i.startAt, 'minutes', true))
       let color: Card.EventCard['color'] = 'primary'
       if (diff < 60) {
         color = 'danger'

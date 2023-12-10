@@ -83,6 +83,14 @@ interface RCheckboxOptions {
   value: any
 }
 
+type WithChildrenProps<T = undefined> = T extends undefined
+  ? {
+      children?: ReactNode
+    }
+  : T & {
+      children?: ReactNode
+    }
+
 type LocalIcon =
   | 'add'
   | 'arrow'

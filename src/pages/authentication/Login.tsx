@@ -8,10 +8,14 @@ import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import LoginSVG from '@/assets/images/login.svg'
 import { useNavigate } from 'react-router-dom'
+import { useAppDispatch } from '@/store/store'
+import { login } from '@/store/slices/auth'
+import { useNotification } from '@/hooks/use-notification'
 
 const Login: React.FC = () => {
   const { t } = useTranslation()
   const navigate = useNavigate()
+  const dispatch = useAppDispatch()
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
   const rules: any = {
@@ -52,6 +56,14 @@ const Login: React.FC = () => {
   }
 
   const icons: LocalIcon[] = ['twitter', 'google', 'facebook']
+
+  const submitLogin = () => {
+    dispatch(login({ email, password }))
+      .unwrap()
+      .catch((err) => {
+        useNotification.error({ message: err.message })
+      })
+  }
 
   return (
     <div className='flex background-color-3061EA w-screen h-screen overflow-y-no-scrollbar <2xl:landscape:h-auto'>
@@ -98,11 +110,12 @@ const Login: React.FC = () => {
               <PrimaryButton
                 className='h-46px basis-1/2 grow-0 shrink-0 overflow-hidden flex items-center justify-center'
                 label='button.login'
+                onClick={submitLogin}
               />
               <RestingButton
                 className='h-46px basis-1/2 grow-0 shrink-0 overflow-hidden flex items-center justify-center'
                 label='button.signup'
-                onClick={(() => navigate('/signup'))}
+                onClick={() => navigate('/signup')}
               />
             </div>
             <div className='mt-77 flex gap-13 items-center'>
@@ -142,10 +155,7 @@ const Login: React.FC = () => {
         )`,
         }}
       >
-        <img
-          className='h-full w-full'
-          src={LoginSVG}
-        />
+        <img className='h-full w-full' src={LoginSVG} />
       </div>
     </div>
   )

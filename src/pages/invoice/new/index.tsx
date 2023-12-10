@@ -177,6 +177,7 @@ const NewInvoice = () => {
                 <PrimaryButton
                   className='p-14-47-15-46'
                   label='page.invoice.detail.common.button.saveAndSend'
+                  onClick={() => {}}
                 />
                 <RestingButton
                   className='p-14-43-15-43'

@@ -5,6 +5,9 @@ declare namespace Auth {
     userId: string
     userName: string
     userRole: RoleType
+    defaultRoute: string
+    authorizedRoutes: Record<AvailableRoute, RouteModel[]>
+    authorizedLeavesRoutes?: string[]
   }
 }
 

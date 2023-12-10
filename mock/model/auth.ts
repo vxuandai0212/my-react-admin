@@ -1,8 +1,24 @@
+import { routeModel } from './route'
+import { omit } from 'lodash-es'
+
 interface UserModel extends Auth.UserInfo {
   token: string
   refreshToken: string
   password: string
 }
+
+const superDefaultRoute = '/dashboard'
+const superAuthorizedRoutes = routeModel as any
+
+const adminDefaultRoute = '/project'
+const adminAuthorizedRoutes = omit(routeModel, ['dashboard', 'report']) as any
+
+const userDefaultRoute = 'task'
+const userAuthorizedRoutes = omit(routeModel, [
+  'dashboard',
+  'report',
+  'project',
+]) as any
 
 export const userModel: UserModel[] = [
   {
@@ -12,6 +28,8 @@ export const userModel: UserModel[] = [
     userName: 'Soybean',
     userRole: 'super',
     password: 'soybean123',
+    defaultRoute: superDefaultRoute,
+    authorizedRoutes: superAuthorizedRoutes,
   },
   {
     token: '__TOKEN_SUPER__',
@@ -20,6 +38,8 @@ export const userModel: UserModel[] = [
     userName: 'Super',
     userRole: 'super',
     password: 'super123',
+    defaultRoute: superDefaultRoute,
+    authorizedRoutes: superAuthorizedRoutes,
   },
   {
     token: '__TOKEN_ADMIN__',
@@ -28,6 +48,8 @@ export const userModel: UserModel[] = [
     userName: 'Admin',
     userRole: 'admin',
     password: 'admin123',
+    defaultRoute: adminDefaultRoute,
+    authorizedRoutes: adminAuthorizedRoutes,
   },
   {
     token: '__TOKEN_USER01__',
@@ -36,5 +58,7 @@ export const userModel: UserModel[] = [
     userName: 'User01',
     userRole: 'user',
     password: 'user01123',
+    defaultRoute: userDefaultRoute,
+    authorizedRoutes: userAuthorizedRoutes,
   },
 ]

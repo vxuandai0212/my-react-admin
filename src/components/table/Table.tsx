@@ -1,4 +1,4 @@
-import { useDatetime, useNumber } from '@/hooks'
+import { Dates, useNumber } from '@/hooks'
 import { useTranslation } from 'react-i18next'
 import RTag from '../tag/RTag'
 import RIcon from '../icon/RIcon'
@@ -51,7 +51,6 @@ const Table: React.FC<Props> = ({ headers, data, handleCommand }) => {
     return align ? align : 'left'
   }
 
-  const { datetime } = useDatetime()
   const { moneyFormat } = useNumber()
 
   function getFormatText(key: any, value: any) {
@@ -59,7 +58,7 @@ const Table: React.FC<Props> = ({ headers, data, handleCommand }) => {
     const format = headers.filter((item) => item.key === key)[0].format
     if (format) {
       if (format.type === 'datetime') {
-        return datetime(value).format(format.value)
+        return Dates.format(value, format.value)
       } else if (format.type === 'currency') {
         return moneyFormat(format.value.style, format.value.currency, value)
       } else {

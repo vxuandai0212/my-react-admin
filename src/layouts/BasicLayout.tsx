@@ -12,7 +12,7 @@ import product from '@/router/modules/product'
 import project from '@/router/modules/project'
 import report from '@/router/modules/report'
 import task from '@/router/modules/task'
-import { useAppSelector } from '@/store/store'
+import { useAppDispatch, useAppSelector } from '@/store/store'
 import { transformAuthRouteToMenu, sortRoutes } from '@/utils/router/menu'
 import { Outlet, useNavigate } from 'react-router-dom'
 import SvgLogo from '@/assets/images/logo.svg'
@@ -21,6 +21,7 @@ import { useTranslation } from 'react-i18next'
 import { Popover } from 'antd'
 import { useState } from 'react'
 import Avatar from '@/assets/images/avatar.png'
+import { resetAuthStore } from '@/store/slices/auth'
 
 const BasicLayout: React.FC = () => {
   const { isMobile } = useScreen()
@@ -57,6 +58,8 @@ const BasicLayout: React.FC = () => {
 
   const [openPopover, setOpenPopover] = useState<boolean>(false)
 
+  const dispatch = useAppDispatch()
+
   const content = (
     <div
       style={{
@@ -73,7 +76,7 @@ const BasicLayout: React.FC = () => {
         }
         onClick={() => {
           setOpenPopover(false)
-          // routerPush({ name: 'project_new' })
+          dispatch(resetAuthStore())
         }}
       >
         {t('common.logout.title')}

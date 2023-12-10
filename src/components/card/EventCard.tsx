@@ -1,4 +1,4 @@
-import { useDatetime } from '@/hooks/use-datetime'
+import { Dates } from '@/hooks/use-datetime'
 import RIcon from '../icon/RIcon'
 import { useTranslation } from 'react-i18next'
 
@@ -16,9 +16,8 @@ const EventCard: React.FC<Card.EventCard> = ({
   color,
 }) => {
   const { t } = useTranslation()
-  const { datetime } = useDatetime()
 
-  const formatDate = () => datetime(date).format('hh:mm A')
+  const formatDate = () => Dates.format(date, 'hh:mm A')
   return (
     <div className='p-16-14-16-21 background-color-background-1 flex flex-col gap-4 rounded-12 transition'>
       <div className='flex justify-between items-center'>
