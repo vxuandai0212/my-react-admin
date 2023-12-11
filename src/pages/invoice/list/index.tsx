@@ -338,57 +338,58 @@ const InvoiceList = () => {
             className='2xl:hidden flex flex-col gap-28 background-color-white rounded-12'
             id='sider'
           ></div>
-          <div className='flex flex-col grow-0 shrink-0 p-20-0-25-0 gap-25 rounded-12 background-color-white'>
-            <div className='p-0-25-0-25'>
+          <div className='flex'>
+            <div className='shrink grow w-50 flex flex-col p-20-0-25-0 gap-25 rounded-12 background-color-white'>
               <SimpleTab
                 onChooseTab={changeStatus}
                 tabs={tabs}
                 activeTab={table.filter.status}
+                className='p-0-25-0-25'
               />
-            </div>
-            <div className='overflow-x-no-scrollbar'>
-              <div className='flex flex-col gap-36 h-full min-w-1000px'>
-                {!loading ? (
-                  <Table
-                    headers={headers}
-                    data={table.items}
-                    handleCommand={handleCommand}
-                  />
-                ) : (
-                  <div className='flex justify-center items-center h-full'>
-                    <BarLoading />
-                  </div>
-                )}
+              <div className='overflow-x-no-scrollbar'>
+                <div className='flex flex-col gap-36 h-full min-w-1000px'>
+                  {!loading ? (
+                    <Table
+                      headers={headers}
+                      data={table.items}
+                      handleCommand={handleCommand}
+                    />
+                  ) : (
+                    <div className='flex justify-center items-center h-full'>
+                      <BarLoading />
+                    </div>
+                  )}
 
-                <div className='flex justify-end p-0-25-0-25 basis-34px grow-0 shrink-0 overflow-hidden'>
-                  <Pagination
-                    current={table.filter.page}
-                    pageSize={table.filter.limit}
-                    pageSizeOptions={[10, 20, 30, 50]}
-                    total={table.total}
-                    showSizeChanger={false}
-                    onChange={handlePageChange}
-                  />
+                  <div className='flex justify-end p-0-25-0-25 basis-34px grow-0 shrink-0 overflow-hidden'>
+                    <Pagination
+                      current={table.filter.page}
+                      pageSize={table.filter.limit}
+                      pageSizeOptions={[10, 20, 30, 50]}
+                      total={table.total}
+                      showSizeChanger={false}
+                      onChange={handlePageChange}
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
-            <Modal
-              open={showModal}
-              centered
-              width='auto'
-              footer={<div />}
-              closeIcon={null}
-              onCancel={(e) => setShowModal(false)}
-            >
-              <div
-                className='rounded-4 background-color-white width-1079 height-814 overflow-hidden'
-                style={{
-                  boxShadow: `0px 6px 16px 0px rgba(153, 155, 168, 0.1)`,
-                }}
+              <Modal
+                open={showModal}
+                centered
+                width='auto'
+                footer={<div />}
+                closeIcon={null}
+                onCancel={(e) => setShowModal(false)}
               >
-                <InvoiceDetail />
-              </div>
-            </Modal>
+                <div
+                  className='rounded-4 background-color-white width-1079 height-814 overflow-hidden'
+                  style={{
+                    boxShadow: `0px 6px 16px 0px rgba(153, 155, 168, 0.1)`,
+                  }}
+                >
+                  <InvoiceDetail />
+                </div>
+              </Modal>
+            </div>
           </div>
         </div>
       </div>

@@ -47,6 +47,7 @@ declare namespace Tab {
     tabs: SimpleTabItem[]
     activeTab: any
     onChooseTab: (v: any) => void
+    className?: string
   }
 
   interface AdvanceTabItem {

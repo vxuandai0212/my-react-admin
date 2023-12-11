@@ -4,6 +4,7 @@ const SimpleTab: React.FC<Tab.SimpleTab> = ({
   tabs,
   activeTab,
   onChooseTab,
+  className = null,
 }) => {
   const { t } = useTranslation()
   const renderTabs = tabs.map((item) => {
@@ -21,7 +22,7 @@ const SimpleTab: React.FC<Tab.SimpleTab> = ({
       </div>
     )
   })
-  return <div className='flex gap-6 overflow-x-no-scrollbar'>{renderTabs}</div>
+  return <div className={`flex gap-6 overflow-x-no-scrollbar ${className}`}>{renderTabs}</div>
 }
 
 export default SimpleTab
