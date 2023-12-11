@@ -105,21 +105,9 @@ const InvoiceList = () => {
     },
   ]
 
-  function handleCreateInvoice(v: any) {
-    console.log('Create invoice: ' + v.id)
-  }
-
   function handleEditInvoice(v: any) {
     setShowModal(true)
     console.log('Edit invoice: ' + v.id)
-  }
-
-  function handleDeleteInvoice(v: any) {
-    console.log('Delete invoice: ' + v.id)
-  }
-
-  function handleRetryInvoice(v: any) {
-    console.log('Retry invoice: ' + v.id)
   }
 
   const STATUS_MAP = {
@@ -223,17 +211,6 @@ const InvoiceList = () => {
       filter: {
         ...state.filter,
         page: v,
-      },
-    }))
-    getData()
-  }
-
-  function handlePageSizeChange(v: number) {
-    setTable((state) => ({
-      ...state,
-      filter: {
-        ...state.filter,
-        limit: v,
       },
     }))
     getData()
@@ -378,7 +355,7 @@ const InvoiceList = () => {
                 width='auto'
                 footer={<div />}
                 closeIcon={null}
-                onCancel={(e) => setShowModal(false)}
+                onCancel={() => setShowModal(false)}
               >
                 <div
                   className='rounded-4 background-color-white width-1079 height-814 overflow-hidden'
