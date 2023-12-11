@@ -89,30 +89,6 @@ const AddButton: React.FC = () => {
         }
         onClick={() => {
           setOpenPopover(false)
-          navigate('/event/new')
-        }}
-      >
-        <div className={'flex gap-15 items-center'}>
-          <IconButton
-            icon={'business'}
-            iconFillColor={'primary'}
-            iconBackgroundColor={'primary-resting'}
-          />
-          <div
-            className={
-              'group-hover:color-primary color-primary-dark font-size-14 font-700 line-height-21 transition'
-            }
-          >
-            {t('common.header.create.event')}
-          </div>
-        </div>
-      </div>
-      <div
-        className={
-          'w-full cursor-pointer p-12-20-13-17 flex items-center justify-between group line-height-24 font-size-14 font-700 hover:background-color-background-extra-light border-bottom-1 border-bottom-solid border-bottom-color-primary-disabled transition'
-        }
-        onClick={() => {
-          setOpenPopover(false)
           navigate('/product/new')
         }}
       >

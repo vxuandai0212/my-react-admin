@@ -147,10 +147,7 @@ const NewInvoice = () => {
         {isNotPC ? siderEl && createPortal(siderRender, siderEl) : siderRender}
       </div>
       <div className='p-0-28-27-28 basis-3/4 grow shrink overflow-hidden flex flex-col h-screen'>
-        <Header
-          className='basis-84px grow-0 shrink-0 overflow-hidden'
-          routeName='routes.invoice.new'
-        />
+        <Header className='basis-84px grow-0 shrink-0 overflow-hidden' />
         <div className='flex flex-col gap-20 overflow-y-no-scrollbar'>
           <div
             className='2xl:hidden flex flex-col gap-28 background-color-white rounded-12'

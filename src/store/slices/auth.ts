@@ -62,7 +62,11 @@ export const handleActionAfterLogin = createAsyncThunk(
 
     const { data } = await fetchUserInfo()
     if (data) {
-      data.authorizedLeavesRoutes = getLeavesRoutes(data.authorizedRoutes).map(item => item.path)
+      const routes = getLeavesRoutes(data.authorizedRoutes)
+      data.authorizedLeavesRoutes = routes
+      data.authorizedFirstLevelRoutes = routes
+        .filter((item) => item.level === 1)
+        .sort((next: any, pre: any) => Number(next.order) - Number(pre.order))
       localStg.set('userInfo', data)
       dispatch(setUserInfo(data))
       dispatch(setToken(token))

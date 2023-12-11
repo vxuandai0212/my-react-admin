@@ -1,63 +1,40 @@
-import calendar from '@/router/modules/calendar'
-import contact from '@/router/modules/contact'
-import dashboard from '@/router/modules/dashboard'
-import fileBrowser from '@/router/modules/file-browser'
-import helpCenter from '@/router/modules/help-center'
-import invoice from '@/router/modules/invoice'
-import kanban from '@/router/modules/kanban'
-import message from '@/router/modules/message'
-import notification from '@/router/modules/notification'
-import product from '@/router/modules/product'
-import project from '@/router/modules/project'
-import report from '@/router/modules/report'
-import task from '@/router/modules/task'
-import { sortRoutes, transformAuthRouteToMenu } from '@/utils/router/menu'
 import { Popover } from 'antd'
 import { useState } from 'react'
 import RIcon from '../icon/RIcon'
 import { useTranslation } from 'react-i18next'
-
-const routes = [
-  calendar,
-  contact,
-  dashboard,
-  fileBrowser,
-  helpCenter,
-  invoice,
-  kanban,
-  message,
-  notification,
-  product,
-  project,
-  report,
-  task,
-]
-
-const menus = transformAuthRouteToMenu(sortRoutes(routes))
+import { useAppSelector } from '@/store/store'
+import { useRoute } from '@/hooks/use-route'
+import { useNavigate } from 'react-router-dom'
 
 const HamburgerMenu: React.FC = () => {
+  const navigate = useNavigate()
+  const menus = useAppSelector(
+    (state) => state.auth.userInfo.authorizedFirstLevelRoutes
+  )
   const { t } = useTranslation()
   const [openPopover, setOpenPopover] = useState<boolean>(false)
-  const current = 'dashboard'
-  const renderContent = menus.map((item: any, index: number) => {
-    const { key, i18nTitle } = item
+  const { activeMenu } = useRoute()
+  const renderContent = menus!.map((item, index: number) => {
+    const { name, i18nTitle } = item
     return (
       <div
-        key={key}
+        key={name}
         className={`w-full cursor-pointer p-12-20-13-17 flex items-center group line-height-24 font-size-14 font-700 hover:background-color-background-extra-light ${
-          index !== menus.length - 1
+          index !== menus!.length - 1
             ? 'border-bottom-1 border-bottom-solid border-bottom-color-primary-disabled'
             : ''
         } transition`}
         onClick={() => {
           setOpenPopover(false)
-          // routerPush({ name: key })
+          navigate(item.path)
         }}
       >
         <div className={'flex gap-15 items-center'}>
           <div
             className={`group-hover:color-primary ${
-              key === current ? 'color-primary' : 'color-primary-dark'
+              item.activeMenu === activeMenu
+                ? 'color-primary'
+                : 'color-primary-dark'
             } font-size-14 font-700 line-height-21 transition`}
           >
             {t(i18nTitle)}
@@ -96,7 +73,9 @@ const HamburgerMenu: React.FC = () => {
           }}
         >
           <RIcon
-            className={`width-16 height-16 ${openPopover ? 'fill-white' : 'fill-primary-grey'}`}
+            className={`width-16 height-16 ${
+              openPopover ? 'fill-white' : 'fill-primary-grey'
+            }`}
             icon='hamburger'
           />
         </div>

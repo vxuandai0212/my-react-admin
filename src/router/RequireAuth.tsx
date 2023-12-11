@@ -15,7 +15,7 @@ const RequireAuth: React.FC<WithChildrenProps> = ({ children }) => {
     if (
       currentPath &&
       authorizedLeavesRoutes &&
-      !authorizedLeavesRoutes.includes(currentPath)
+      !authorizedLeavesRoutes.map(item => item.path).includes(currentPath)
     ) {
       return <Navigate to='/403' replace />
     }

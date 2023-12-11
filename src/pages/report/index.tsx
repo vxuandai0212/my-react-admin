@@ -56,10 +56,7 @@ const Report = () => {
         </div>
       </div>
       <div className='p-0-28-0-28 grow shrink overflow-hidden flex flex-col h-screen'>
-        <Header
-          className='basis-84px grow-0 shrink-0 overflow-hidden'
-          routeName='routes.report.list'
-        />
+        <Header className='basis-84px grow-0 shrink-0 overflow-hidden' />
         <div className='flex flex-col gap-28 overflow-y-no-scrollbar p-0-0-28-0'>
           <div className='grid grid-cols-3 gap-28 2xl:hidden' id='sider'></div>
           <div className='grid grid-cols-3 gap-28'>

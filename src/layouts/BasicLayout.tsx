@@ -1,19 +1,5 @@
 import { useScreen } from '@/hooks'
-import calendar from '@/router/modules/calendar'
-import contact from '@/router/modules/contact'
-import dashboard from '@/router/modules/dashboard'
-import fileBrowser from '@/router/modules/file-browser'
-import helpCenter from '@/router/modules/help-center'
-import invoice from '@/router/modules/invoice'
-import kanban from '@/router/modules/kanban'
-import message from '@/router/modules/message'
-import notification from '@/router/modules/notification'
-import product from '@/router/modules/product'
-import project from '@/router/modules/project'
-import report from '@/router/modules/report'
-import task from '@/router/modules/task'
 import { useAppDispatch, useAppSelector } from '@/store/store'
-import { transformAuthRouteToMenu, sortRoutes } from '@/utils/router/menu'
 import { Outlet, useNavigate } from 'react-router-dom'
 import SvgLogo from '@/assets/images/logo.svg'
 import RIcon from '@/components/icon/RIcon'
@@ -22,37 +8,24 @@ import { Popover } from 'antd'
 import { useState } from 'react'
 import Avatar from '@/assets/images/avatar.png'
 import { resetAuthStore } from '@/store/slices/auth'
+import { useRoute } from '@/hooks/use-route'
 
 const BasicLayout: React.FC = () => {
   const { isMobile } = useScreen()
 
   const navigate = useNavigate()
 
-  const current = 'dashboard'
-
-  const haveNotification = 'Messages'
+  const haveNotification = 'message'
 
   const app = useAppSelector((state) => state.app)
 
+  const { activeMenu } = useRoute()
+
   const collapsed = app.siderCollapse
 
-  const routes = [
-    calendar,
-    contact,
-    dashboard,
-    fileBrowser,
-    helpCenter,
-    invoice,
-    kanban,
-    message,
-    notification,
-    product,
-    project,
-    report,
-    task,
-  ]
-
-  const menus = transformAuthRouteToMenu(sortRoutes(routes))
+  const menus = useAppSelector(
+    (state) => state.auth.userInfo.authorizedFirstLevelRoutes
+  )
 
   const { t } = useTranslation()
 
@@ -84,36 +57,40 @@ const BasicLayout: React.FC = () => {
     </div>
   )
 
-  const renderMenus = menus.map((item: any) => {
+  const renderMenus = menus?.map((item) => {
     return (
       <div
-        key={item.key}
+        key={item.name}
         className='p-8-0-8-19 group flex jusity-between cursor-pointer'
       >
         <div
           className={`group-hover:background-color-info flex items-center transition mr-19 rounded-4 relative ${
-            item.key === current
+            item.activeMenu === activeMenu
               ? 'background-color-primary-resting'
               : 'background-color-white'
           } ${collapsed ? 'gap-0' : 'gap-15 grow'}`}
-          onClick={() => navigate(item.key)}
+          onClick={() => navigate(item.path)}
         >
-          {item.label === haveNotification ? (
+          {item.activeMenu === haveNotification ? (
             <div className='background-color-danger absolute width-12 height-12 left-26 top-11 rounded-50 border-color-white border-2'></div>
           ) : null}
           <div className='width-48 flex justify-center'>
             <RIcon
-              width={`${item.iconWidth}px`}
-              height={`${item.iconHeight}px`}
+              width={`${item.icon?.width}px`}
+              height={`${item.icon?.height}px`}
               className={`group-hover:fill-white transition ${
-                item.key === current ? 'fill-primary' : 'fill-primary-grey'
+                item.activeMenu === activeMenu
+                  ? 'fill-primary'
+                  : 'fill-primary-grey'
               }`}
-              icon={item.icon}
+              icon={item.icon!.name}
             />
           </div>
           <span
             className={`group-hover:color-white font-size-14 font-700 line-height-21 overflow-hidden truncate transition ${
-              item.key === current ? 'color-primary-dark' : 'color-primary-grey'
+              item.activeMenu === activeMenu
+                ? 'color-primary-dark'
+                : 'color-primary-grey'
             } ${collapsed ? 'width-0' : ''}`}
           >
             {t(item.i18nTitle)}
@@ -121,7 +98,7 @@ const BasicLayout: React.FC = () => {
         </div>
         <div
           className={`width-2 height-48 rounded-1 transition ${
-            item.key === current
+            item.activeMenu === activeMenu
               ? 'background-color-primary'
               : 'background-color-white'
           }`}
@@ -179,7 +156,6 @@ const BasicLayout: React.FC = () => {
           </div>
         </div>
       ) : null}
-
       <Outlet />
     </div>
   )

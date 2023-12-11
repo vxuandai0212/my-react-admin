@@ -92,8 +92,6 @@ const TransitionRoute: React.FC = () => {
           <Route path='task/new' element={<InvoiceNew />} />
           <Route path='contact' element={<InvoiceList />} />
           <Route path='contact/new' element={<InvoiceNew />} />
-          <Route path='event' element={<InvoiceList />} />
-          <Route path='event/new' element={<InvoiceNew />} />
           <Route path='product' element={<InvoiceList />} />
           <Route path='product/new' element={<InvoiceNew />} />
         </Route>
