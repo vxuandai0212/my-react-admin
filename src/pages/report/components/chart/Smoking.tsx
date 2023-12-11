@@ -14,10 +14,10 @@ const Smoking: React.FC<{ className?: string }> = ({ className }) => {
 
   const [chartData, setChartDataState] = useState<LineChartProps['option']>()
 
-  const [fromDate, setFromDate] = useState<number>(
+  const [fromDate] = useState<number>(
     dayjs().startOf('day').valueOf()
   )
-  const [toDate, setToDate] = useState<number>(dayjs().endOf('day').valueOf())
+  const [toDate] = useState<number>(dayjs().endOf('day').valueOf())
   const [menSale, setMenSale] = useState<string>()
   const [womenSale, setWomenSale] = useState<string>()
 

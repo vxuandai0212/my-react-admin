@@ -8,6 +8,7 @@ import i18n, { Resource } from 'i18next'
 import { initReactI18next } from 'react-i18next'
 import locales from '@/locales/locale'
 import { reduce } from 'lodash-es'
+import { localStg } from '@/utils'
 
 export const ANT_MAP_LOCALE: {
   [key: string]: Locale
@@ -32,10 +33,13 @@ const resources: Resource = reduce(
   {}
 )
 
+
+const localLanguage = localStg.get('lang') || 'vi'
+
 export function setupI18n() {
   i18n.use(initReactI18next).init({
     resources,
-    lng: 'vi',
+    lng: localLanguage,
     fallbackLng: 'vi',
     interpolation: {
       escapeValue: false,

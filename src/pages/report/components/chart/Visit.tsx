@@ -10,7 +10,6 @@ import { useTranslation } from 'react-i18next'
 
 const Visit: React.FC<{ className?: string }> = ({ className }) => {
   const { t } = useTranslation()
-  const [showDatePicker, setShowDatePicker] = useState<boolean>(false)
 
   const dateFilters: Tab.SimpleTabItem[] = [
     {

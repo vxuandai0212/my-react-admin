@@ -9,6 +9,10 @@ export function getUserInfo() {
     userId: '',
     userName: '',
     userRole: 'user',
+    defaultRoute: '',
+    authorizedFirstLevelRoutes: undefined,
+    authorizedRoutes: undefined,
+    authorizedLeavesRoutes: undefined,
   }
   const userInfo: Auth.UserInfo = localStg.get('userInfo') || emptyInfo
 

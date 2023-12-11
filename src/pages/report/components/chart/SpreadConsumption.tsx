@@ -10,10 +10,10 @@ import { useTranslation } from 'react-i18next'
 const SpreadConsumption: React.FC<{ className?: string }> = ({ className }) => {
   const { t } = useTranslation()
 
-  const [fromDate, setFromDate] = useState<number>(
+  const [fromDate] = useState<number>(
     dayjs().startOf('day').valueOf()
   )
-  const [toDate, setToDate] = useState<number>(dayjs().endOf('day').valueOf())
+  const [toDate] = useState<number>(dayjs().endOf('day').valueOf())
 
   const { loading, startLoading, endLoading } = useLoading(false)
 

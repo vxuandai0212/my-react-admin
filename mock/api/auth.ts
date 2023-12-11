@@ -75,7 +75,7 @@ const apis: MockMethod[] = [
         userName: '',
         userRole: 'user',
         defaultRoute: '',
-        authorizedRoutes: []
+        authorizedRoutes: undefined
       }
       const isInUser = userModel.some((item) => {
         const flag = item.token === authorization

@@ -104,6 +104,7 @@ const Signup: React.FC = () => {
               <PrimaryButton
                 className='h-46px basis-1/2 grow-0 shrink-0 overflow-hidden flex items-center justify-center'
                 label='button.signup'
+                onClick={() => {}}
               />
               <RestingButton
                 className='h-46px basis-1/2 grow-0 shrink-0 overflow-hidden flex items-center justify-center'

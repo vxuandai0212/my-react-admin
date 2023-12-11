@@ -10,7 +10,7 @@ const SimpleSearch: React.FC = () => {
   const simpleSearchContainerRef = useRef<HTMLDivElement>(null)
   const [inputValue, setInputValue] = useState<any>()
   const [showInput, setShowInput] = useState<boolean>(false)
-  const [showDropdown, setShowDropdown] = useState<boolean>(false)
+  const [, setShowDropdown] = useState<boolean>(false)
 
   useEffect(() => {
     if (showInput) {

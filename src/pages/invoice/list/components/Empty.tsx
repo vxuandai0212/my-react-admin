@@ -15,6 +15,7 @@ const InvoiceEmpty = () => {
       <PrimaryButton
         label='common.header.create.invoice'
         className='p-14-44-15-44 mt-21'
+        onClick={() => {}}
       />
     </div>
   )

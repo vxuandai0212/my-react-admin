@@ -23,10 +23,8 @@ const Transportation: React.FC<{ className?: string }> = ({ className }) => {
     },
   ]
 
-  const [fromDate, setFromDate] = useState<number>(
-    dayjs().startOf('day').valueOf()
-  )
-  const [toDate, setToDate] = useState<number>(dayjs().endOf('day').valueOf())
+  const [, setFromDate] = useState<number>(dayjs().startOf('day').valueOf())
+  const [, setToDate] = useState<number>(dayjs().endOf('day').valueOf())
 
   function changeFilterTab(v: 'day' | 'week' | 'month') {
     if (v === 'day') {
@@ -97,7 +95,12 @@ const Transportation: React.FC<{ className?: string }> = ({ className }) => {
       {loading ? (
         <BarLoading className='height-320 grow flex justify-center items-center w-full' />
       ) : (
-        chartData && <PieChart option={chartData} className='height-320 grow overflow-hidden' />
+        chartData && (
+          <PieChart
+            option={chartData}
+            className='height-320 grow overflow-hidden'
+          />
+        )
       )}
     </div>
   )

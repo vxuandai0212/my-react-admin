@@ -62,7 +62,7 @@ export const handleActionAfterLogin = createAsyncThunk(
 
     const { data } = await fetchUserInfo()
     if (data) {
-      const routes = getLeavesRoutes(data.authorizedRoutes)
+      const routes = getLeavesRoutes(data.authorizedRoutes!)
       data.authorizedLeavesRoutes = routes
       data.authorizedFirstLevelRoutes = routes
         .filter((item) => item.level === 1)
