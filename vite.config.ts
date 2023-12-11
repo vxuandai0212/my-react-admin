@@ -11,7 +11,6 @@ export default defineConfig((configEnv) => {
 
   const srcPath = getSrcPath()
 
-  const isOpenProxy = viteEnv.VITE_HTTP_PROXY === 'Y'
   const envConfig = getServiceEnvConfig(viteEnv)
 
   return {
@@ -34,7 +33,7 @@ export default defineConfig((configEnv) => {
       host: '0.0.0.0',
       port: 3200,
       open: true,
-      proxy: createViteProxy(isOpenProxy, envConfig),
+      proxy: createViteProxy(true, envConfig),
     },
     optimizeDeps: {
       include: ['echarts'],
