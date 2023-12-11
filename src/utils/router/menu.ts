@@ -81,10 +81,16 @@ function addPartialProps(config: {
   return item
 }
 
-export function getLeavesRoutes(routes: Record<AvailableRoute, RouteModel[]>) {
-  const data: { path: string }[] = []
+export function getLeavesRoutes(
+  routes: Record<AvailableRoute, RouteModel[]>
+): Pick<RouteModel, 'name' | 'i18nTitle' | 'activeMenu' | 'path'>[] {
+  const data: Pick<RouteModel, 'name' | 'i18nTitle' | 'activeMenu' | 'path'>[] =
+    []
   for (const [, value] of Object.entries(routes)) {
-    value.map((item) => data.push({ path: item.path }))
+    value.map(({ name, i18nTitle, level, path, activeMenu }) => {
+      const menu = level === 1 ? name : activeMenu
+      data.push({ name, i18nTitle, path, activeMenu: menu })
+    })
   }
   return data
 }

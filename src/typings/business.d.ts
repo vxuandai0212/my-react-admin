@@ -7,7 +7,7 @@ declare namespace Auth {
     userRole: RoleType
     defaultRoute: string
     authorizedRoutes: Record<AvailableRoute, RouteModel[]>
-    authorizedLeavesRoutes?: string[]
+    authorizedLeavesRoutes?: Pick<RouteModel, 'name' | 'i18nTitle' | 'activeMenu' | 'path'>[]
   }
 }
 
