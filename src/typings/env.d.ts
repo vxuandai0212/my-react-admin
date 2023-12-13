@@ -24,6 +24,7 @@ interface ImportMetaEnv {
     | 'deflate'
     | 'deflateRaw'
   readonly VITE_ENABLE_MOCK?: 'Y' | 'N'
+  readonly VITE_BACKEND_URL?: string
 }
 
 interface ImportMeta {

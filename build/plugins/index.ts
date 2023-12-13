@@ -9,7 +9,7 @@ import { compress } from './compress'
 export function setupVitePlugins(
   viteEnv: ImportMetaEnv
 ): (PluginOption | PluginOption[])[] {
-  const plugins = [UnoCSS(), mock(), progress(), react()]
+  const plugins = [UnoCSS(), mock(viteEnv), progress(), react()]
 
   if (viteEnv.VITE_VISUALIZER === 'Y') {
     plugins.push(visualizer as PluginOption)

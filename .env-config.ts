@@ -15,10 +15,10 @@ const serviceEnv: ServiceEnv = {
 export function getServiceEnvConfig(
   env: ImportMetaEnv
 ): ServiceEnvConfigWithProxyPattern {
-  const { VITE_SERVICE_ENV = 'dev' } = env
+  const { VITE_SERVICE_ENV = "dev" } = env
   const config = serviceEnv[VITE_SERVICE_ENV]
   return {
     ...config,
-    proxyPattern: '/proxy-pattern',
+    proxyPattern: "/proxy-pattern",
   }
 }

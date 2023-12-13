@@ -1,9 +1,11 @@
 import { viteMockServe } from 'vite-plugin-mock'
 
-export default () => {
+export default (viteEnv: ImportMetaEnv) => {
+  const prodMock = viteEnv.VITE_ENABLE_MOCK === 'Y'
+
   return viteMockServe({
     mockPath: 'mock',
-    prodEnabled: true,
+    prodEnabled: prodMock,
     injectCode: `
 			import { setupMockServer } from '../mock';
 			setupMockServer();
